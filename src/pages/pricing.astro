@@ -1,10 +1,81 @@
 ---
 import CTASection from "../components/CTASection.astro";
-import IconCard from "../components/IconCard.astro";
 import PageHero from "../components/PageHero.astro";
 import Section from "../components/Section.astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { seo } from "../data/site";
+
+const platformFees = [
+  {
+    label: "Single delivery",
+    price: "£1.50",
+    detail: "Platform fee"
+  },
+  {
+    label: "Bundle - 2 drops",
+    price: "£2.50",
+    detail: "Platform fee"
+  },
+  {
+    label: "Bundle - 3 drops",
+    price: "£3.00",
+    detail: "Platform fee"
+  },
+  {
+    label: "Bundle - 4 drops",
+    price: "£4.50",
+    detail: "Platform fee"
+  }
+];
+
+const exampleItems = [
+  "Driver payment offered: £6.50",
+  "EDD Hub platform fee: £1.50",
+  "Customer pays the takeaway as normal",
+  "Takeaway pays the driver directly",
+  "EDD Hub platform fee is included in the takeaway invoice"
+];
+
+const notChargedItems = [
+  "Customers do not order through EDD Hub.",
+  "Customers do not pay EDD Hub.",
+  "EDD Hub does not take a commission from customer food orders.",
+  "EDD Hub does not run a driver wallet at launch.",
+  "EDD Hub does not handle driver payouts at launch."
+];
+
+const faqs = [
+  {
+    question: "Who pays the driver?",
+    answer:
+      "The takeaway pays the driver directly using its existing arrangement. EDD Hub does not handle driver payouts at launch."
+  },
+  {
+    question: "Who sets the driver payment?",
+    answer:
+      "The takeaway sets the payment offered for each run. Drivers see the payment before deciding whether to accept."
+  },
+  {
+    question: "When is the platform fee charged?",
+    answer:
+      "The platform fee applies to completed or billable delivery runs according to the EDD Hub rules and invoice process."
+  },
+  {
+    question: "Are customers charged by EDD Hub?",
+    answer:
+      "No. EDD Hub is not a customer ordering platform. Customers order and pay through the takeaway as normal."
+  },
+  {
+    question: "Is there a subscription?",
+    answer:
+      "Launch pricing and any future subscription options will be confirmed before takeaways go live. The current pricing page focuses on platform fees per run."
+  },
+  {
+    question: "Is VAT charged?",
+    answer:
+      "EDD Hub is not currently VAT registered. VAT treatment may change if EDD Hub becomes VAT registered later."
+  }
+];
 ---
 
 <BaseLayout title={seo.pricing.title} description={seo.pricing.description} path={seo.pricing.path}>
@@ -12,38 +83,118 @@ import { seo } from "../data/site";
     <PageHero
       badge="Pricing"
       title="Simple pricing for overflow delivery support"
-      intro="EDD Hub keeps pricing clear for takeaways: driver payment is separate from any EDD Hub platform fee, and final launch pricing will be confirmed before takeaways go live."
+      intro="EDD Hub helps takeaways access extra delivery support when they need it, without replacing their existing delivery operation."
       primaryHref="/contact#takeaway-enquiry"
       primaryLabel="Register takeaway interest"
       secondaryHref="/how-it-works"
       secondaryLabel="How it works"
-      highlights={["Driver payment is separate", "Platform fees are separate", "No customer ordering"]}
+      highlights={["No customer ordering", "No driver wallet", "No hidden customer fees"]}
     />
 
-    <Section title="Current pricing position" intro="Final launch pricing will be confirmed before takeaways go live." tone="white">
-      <div class="grid gap-4 md:grid-cols-3">
-        <IconCard icon="pricing" title="Driver payment is separate" text="The takeaway offers the driver payment for a run. That payment is separate from EDD Hub platform fees." tone="brand" />
-        <IconCard icon="message" title="Platform fees are separate" text="EDD Hub platform pricing will be explained clearly before a takeaway goes live." tone="teal" />
-        <IconCard icon="shield" title="No customer ordering fees" text="Customers do not order or pay through EDD Hub, so customer marketplace charges do not apply." tone="gold" />
+    <Section title="Two separate payments, kept clear" intro="EDD Hub separates the platform fee paid to EDD Hub from the driver payment offered by the takeaway." tone="white">
+      <div class="grid gap-5 md:grid-cols-2">
+        <article class="rounded-lg border border-[#eadfce] bg-[#fffaf3] p-6 shadow-[0_18px_45px_rgba(48,29,20,0.07)]">
+          <p class="text-sm font-extrabold text-[#a96f40]">Paid to EDD Hub</p>
+          <h2 class="mt-2 text-2xl font-extrabold text-[#601d1d]">EDD Hub platform fee</h2>
+          <p class="mt-3 leading-7 text-[#5d4c43]">
+            This is the fee paid by the takeaway to EDD Hub for using the platform when a run is completed.
+          </p>
+        </article>
+
+        <article class="rounded-lg border border-[#d4e5dc] bg-[#f6fbf7] p-6 shadow-[0_18px_45px_rgba(48,29,20,0.07)]">
+          <p class="text-sm font-extrabold text-[#2f8f5b]">Paid to the driver</p>
+          <h2 class="mt-2 text-2xl font-extrabold text-[#601d1d]">Driver payment</h2>
+          <p class="mt-3 leading-7 text-[#5d4c43]">
+            This is the amount the takeaway offers to the driver for the delivery run. The driver sees it before accepting, and the takeaway pays the driver directly using its existing arrangement.
+          </p>
+        </article>
+      </div>
+
+      <p class="mt-5 rounded-lg border border-[#fbb040]/40 bg-[#fff6df] px-5 py-4 text-sm font-extrabold leading-6 text-[#601d1d]">
+        EDD Hub does not handle driver payouts at launch.
+      </p>
+    </Section>
+
+    <Section title="Current platform fees" intro="Platform fees are separate from the driver payment offered on the run." tone="warm">
+      <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        {
+          platformFees.map((fee) => (
+            <article class="rounded-lg border border-[#eadfce] bg-white p-5 shadow-[0_16px_35px_rgba(48,29,20,0.07)] transition duration-200 hover:-translate-y-0.5">
+              <h2 class="min-h-14 text-lg font-extrabold leading-tight text-[#601d1d]">{fee.label}</h2>
+              <p class="mt-5 text-4xl font-extrabold text-[#301d14]">{fee.price}</p>
+              <p class="mt-2 text-sm font-extrabold text-[#a96f40]">{fee.detail}</p>
+            </article>
+          ))
+        }
       </div>
     </Section>
 
-    <Section title="What takeaways should know" intro="EDD Hub is for overflow delivery coordination, not customer ordering or driver payout processing." tone="warm">
-      <div class="grid gap-3 text-sm font-bold leading-6 text-[#4a3731] md:grid-cols-2">
-        <p class="rounded-lg bg-[#fffaf3] p-4">The takeaway offers the driver payment for each run.</p>
-        <p class="rounded-lg bg-[#fffaf3] p-4">EDD Hub platform fees are separate from driver payment.</p>
-        <p class="rounded-lg bg-[#fffaf3] p-4">EDD Hub does not handle driver payouts at launch.</p>
-        <p class="rounded-lg bg-[#fffaf3] p-4">Customers do not order or pay through EDD Hub.</p>
+    <Section title="Example" intro="A takeaway creates a single delivery run." tone="white">
+      <div class="grid gap-6 lg:grid-cols-[0.8fr_1.2fr] lg:items-start">
+        <div class="rounded-lg bg-[#601d1d] p-6 text-[#fffaf3] shadow-[0_18px_45px_rgba(96,29,29,0.18)]">
+          <p class="text-sm font-extrabold text-[#f4d9b2]">Single delivery</p>
+          <p class="mt-4 text-5xl font-extrabold">£1.50</p>
+          <p class="mt-2 text-sm font-extrabold text-[#fbb040]">EDD Hub platform fee</p>
+        </div>
+
+        <div class="rounded-lg border border-[#eadfce] bg-[#fffaf3] p-6">
+          <ul class="grid gap-3 text-sm font-bold leading-6 text-[#4a3731] sm:grid-cols-2">
+            {exampleItems.map((item) => <li class="rounded-lg bg-white px-4 py-3">{item}</li>)}
+          </ul>
+          <p class="mt-5 text-sm leading-6 text-[#5d4c43]">
+            This is only an example. The takeaway chooses the driver payment offered for each run.
+          </p>
+        </div>
       </div>
+    </Section>
+
+    <Section title="Simple weekly billing" intro="EDD Hub platform fees are recorded and invoiced to the takeaway. During the launch period, invoices are handled manually and paid by bank transfer." tone="warm">
+      <div class="grid gap-4 md:grid-cols-3">
+        <article class="rounded-lg bg-[#fffaf3] p-5">
+          <h2 class="text-lg font-extrabold text-[#601d1d]">Weekly period</h2>
+          <p class="mt-2 text-sm leading-6 text-[#5d4c43]">Monday 06:00 to the following Monday 05:59:59.</p>
+        </article>
+        <article class="rounded-lg bg-[#fffaf3] p-5">
+          <h2 class="text-lg font-extrabold text-[#601d1d]">Invoice payment</h2>
+          <p class="mt-2 text-sm leading-6 text-[#5d4c43]">Invoices are paid by bank transfer during the launch period.</p>
+        </article>
+        <article class="rounded-lg bg-[#fffaf3] p-5">
+          <h2 class="text-lg font-extrabold text-[#601d1d]">Bank details</h2>
+          <p class="mt-2 text-sm leading-6 text-[#5d4c43]">Bank details are shown on invoices only.</p>
+        </article>
+      </div>
+    </Section>
+
+    <Section title="No customer ordering fees" intro="EDD Hub is not a customer food-ordering app." tone="white">
+      <ul class="grid gap-3 text-sm font-bold leading-6 text-[#4a3731] md:grid-cols-2">
+        {notChargedItems.map((item) => <li class="rounded-lg border border-[#eadfce] bg-[#fffaf3] px-4 py-3">{item}</li>)}
+      </ul>
+    </Section>
+
+    <Section title="Pricing FAQs" intro="Short answers for takeaway owners reviewing EDD Hub pricing." tone="warm">
+      <div class="grid gap-4 md:grid-cols-2">
+        {
+          faqs.map((faq) => (
+            <article class="rounded-lg bg-[#fffaf3] p-5">
+              <h2 class="text-base font-extrabold text-[#601d1d]">{faq.question}</h2>
+              <p class="mt-2 text-sm leading-6 text-[#5d4c43]">{faq.answer}</p>
+            </article>
+          ))
+        }
+      </div>
+
+      <p class="mt-6 text-sm leading-6 text-[#5d4c43]">
+        Full terms will be available in the <a class="font-extrabold text-[#601d1d] underline decoration-[#fbb040] decoration-2 underline-offset-4 hover:text-[#4c1616]" href="/legal/takeaway-terms">EDD Hub Takeaway Terms</a>.
+      </p>
     </Section>
 
     <CTASection
-      title="Need pricing details?"
-      text="Register takeaway interest and EDD Hub can explain the current pricing position before you go live."
+      title="Want delivery backup without hiring another permanent driver?"
+      text="Register your takeaway interest and we'll explain availability, onboarding and pricing before your account goes live."
       primaryLabel="Register takeaway interest"
       primaryHref="/contact#takeaway-enquiry"
-      secondaryLabel="For takeaways"
-      secondaryHref="/for-takeaways"
+      secondaryLabel="Contact EDD Hub"
+      secondaryHref="/contact#general-enquiry"
     />
   </main>
 </BaseLayout>
