@@ -1,0 +1,40 @@
+---
+import CTASection from "../components/CTASection.astro";
+import IconCard from "../components/IconCard.astro";
+import PageHero from "../components/PageHero.astro";
+import Section from "../components/Section.astro";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { seo } from "../data/site";
+---
+
+<BaseLayout title={seo.safety.title} description={seo.safety.description} path={seo.safety.path}>
+  <main>
+    <PageHero
+      badge="Trust"
+      title="Safety and trust"
+      intro="EDD Hub supports clearer delivery coordination with reviewed drivers, useful records and careful service promises."
+      primaryHref="/contact#general-enquiry"
+      primaryLabel="Ask a question"
+      secondaryHref="/legal"
+      secondaryLabel="Legal"
+      highlights={["Reviewed drivers", "Operational records", "No false guarantees"]}
+    />
+
+    <Section title="Practical trust controls" intro="EDD Hub explains trust clearly without pretending that software removes every delivery risk." tone="white">
+      <div class="grid gap-4 md:grid-cols-3">
+        <IconCard icon="shield" title="Driver review" text="Drivers are reviewed before becoming active and provide documents during onboarding." tone="brand" />
+        <IconCard icon="list" title="Operational records" text="Job references, status timelines and issue records help make coordination clearer." tone="blue" />
+        <IconCard icon="message" title="Issue handling" text="EDD Hub may review delivery issues where the app records support that review." tone="gold" />
+      </div>
+    </Section>
+
+    <Section title="Careful commitments" intro="Trust also means avoiding claims that cannot be guaranteed." tone="warm">
+      <div class="grid gap-4 md:grid-cols-2">
+        <IconCard icon="check" title="No guaranteed delivery times" text="EDD Hub helps coordinate overflow support but does not guarantee delivery timing." tone="teal" />
+        <IconCard icon="check" title="No guaranteed work or earnings" text="Independent drivers are not promised jobs or earnings through EDD Hub." tone="green" />
+      </div>
+    </Section>
+
+    <CTASection title="Need more detail?" text="Contact EDD Hub with safety, rollout or service questions before registering interest." primaryLabel="Contact EDD Hub" primaryHref="/contact#general-enquiry" secondaryLabel="FAQs" secondaryHref="/faqs" />
+  </main>
+</BaseLayout>

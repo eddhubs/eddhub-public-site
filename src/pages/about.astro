@@ -1,0 +1,42 @@
+---
+import CTASection from "../components/CTASection.astro";
+import IconCard from "../components/IconCard.astro";
+import PageHero from "../components/PageHero.astro";
+import Section from "../components/Section.astro";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { seo } from "../data/site";
+---
+
+<BaseLayout title={seo.about.title} description={seo.about.description} path={seo.about.path}>
+  <main>
+    <PageHero
+      badge="About"
+      title="Why EDD Hub exists"
+      intro="EDD Hub exists because local takeaways can face delivery pressure without needing a customer marketplace."
+      primaryHref="/contact#general-enquiry"
+      primaryLabel="Contact EDD Hub"
+      secondaryHref="/how-it-works"
+      secondaryLabel="How it works"
+      highlights={["Local takeaway pressure", "Independent drivers", "Overflow coordination"]}
+    />
+
+    <Section title="A practical local problem" intro="Busy takeaway nights can be affected by driver shortages, bundled runs, weather, sickness or sudden demand. EDD Hub focuses on coordinating overflow support around those moments." tone="white">
+      <div class="grid gap-4 md:grid-cols-3">
+        <IconCard icon="takeaway" title="Takeaways keep their operation" text="EDD Hub supports existing takeaway workflows instead of replacing ordering." tone="brand" />
+        <IconCard icon="driver" title="Drivers stay independent" text="Drivers choose whether to accept available runs and are not employed by EDD Hub." tone="green" />
+        <IconCard icon="location" title="Local first" text="The public rollout starts locally and grows carefully based on real demand." tone="blue" />
+      </div>
+    </Section>
+
+    <Section title="What EDD Hub focuses on" intro="EDD Hub keeps the focus on practical delivery support for takeaways and clear choices for independent drivers." tone="warm">
+      <div class="grid gap-3 text-sm font-bold leading-6 text-[#4a3731] md:grid-cols-2">
+        <p class="rounded-lg bg-[#fffaf3] p-4">Explain overflow delivery coordination clearly.</p>
+        <p class="rounded-lg bg-[#fffaf3] p-4">Avoid marketplace, ordering and tracking language.</p>
+        <p class="rounded-lg bg-[#fffaf3] p-4">Support local takeaways during busy service periods.</p>
+        <p class="rounded-lg bg-[#fffaf3] p-4">Help approved drivers review suitable local runs.</p>
+      </div>
+    </Section>
+
+    <CTASection title="Talk to EDD Hub" text="Register interest as a takeaway, independent driver, partner or media contact." primaryLabel="Contact EDD Hub" primaryHref="/contact#general-enquiry" secondaryLabel="Read FAQs" secondaryHref="/faqs" />
+  </main>
+</BaseLayout>

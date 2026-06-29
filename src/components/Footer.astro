@@ -1,0 +1,25 @@
+---
+import { footerLinks } from "../data/nav";
+import { site } from "../data/site";
+---
+
+<footer class="border-t border-[#a97c50]/18 bg-[#fffaf3]">
+  <div class="mx-auto grid w-full max-w-6xl gap-8 px-4 py-10 sm:px-6 lg:grid-cols-[1.1fr_1fr] lg:px-8">
+    <div>
+      <img src="/images/brand/edd-logo-text.png" alt="EDD Hub" class="h-11 w-auto" />
+      <p class="mt-4 max-w-md text-sm leading-6 text-[#5d4c43]">
+        EDD Hub helps local takeaways access overflow delivery support from approved independent drivers.
+      </p>
+      <div class="mt-5 grid gap-1 text-sm font-bold text-[#4a3731]">
+        <a href={`mailto:${site.email}`}>{site.email}</a>
+        <span>{site.location}</span>
+      </div>
+    </div>
+    <nav aria-label="Footer navigation" class="grid grid-cols-1 gap-2 sm:grid-cols-2">
+      {footerLinks.map((link) => <a class="rounded-lg py-1.5 text-sm font-bold text-[#5d4c43] hover:text-[#601d1d]" href={link.href}>{link.label}</a>)}
+    </nav>
+  </div>
+  <div class="border-t border-[#a97c50]/18 px-4 py-4 text-center text-xs font-bold text-[#6e5a4f]">
+    &copy; {new Date().getFullYear()} EDD Hub. Overflow delivery support for local takeaways.
+  </div>
+</footer>

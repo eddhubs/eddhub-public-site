@@ -1,0 +1,49 @@
+---
+interface Props {
+  eyebrow?: string;
+  title?: string;
+  intro?: string;
+  tone?: "mist" | "warm" | "white" | "dark";
+  id?: string;
+  class?: string;
+}
+
+const {
+  eyebrow,
+  title,
+  intro,
+  tone = "mist",
+  id,
+  class: className = ""
+} = Astro.props;
+
+const tones = {
+  mist: "bg-[#f8f7f4]",
+  warm: "bg-[#f4efe7]",
+  white: "bg-white",
+  dark: "bg-[#301d14] text-[#fffaf3]"
+};
+---
+
+<section id={id} class:list={["section-divider py-12 sm:py-16", tones[tone], className]}>
+  <div class="mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8">
+    {
+      eyebrow || title || intro ? (
+        <div class="mb-8 max-w-3xl">
+          {eyebrow ? <p class="mb-2 text-sm font-extrabold text-[#a96f40]">{eyebrow}</p> : null}
+          {title ? (
+            <h2 class:list={["text-[1.65rem] font-extrabold leading-tight sm:text-3xl", tone === "dark" ? "text-[#fffaf3]" : "text-[#601d1d]"]}>
+              {title}
+            </h2>
+          ) : null}
+          {intro ? (
+            <p class:list={["mt-3 text-base leading-7", tone === "dark" ? "text-[#f4d9b2]" : "text-[#5d4c43]"]}>
+              {intro}
+            </p>
+          ) : null}
+        </div>
+      ) : null
+    }
+    <slot />
+  </div>
+</section>

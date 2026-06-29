@@ -1,0 +1,49 @@
+---
+import CTASection from "../components/CTASection.astro";
+import IconCard from "../components/IconCard.astro";
+import PageHero from "../components/PageHero.astro";
+import Section from "../components/Section.astro";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { seo } from "../data/site";
+---
+
+<BaseLayout title={seo.pricing.title} description={seo.pricing.description} path={seo.pricing.path}>
+  <main>
+    <PageHero
+      badge="Pricing"
+      title="Simple pricing for overflow delivery support"
+      intro="EDD Hub keeps pricing clear for takeaways: driver payment is separate from any EDD Hub platform fee, and final launch pricing will be confirmed before takeaways go live."
+      primaryHref="/contact#takeaway-enquiry"
+      primaryLabel="Ask about pricing"
+      secondaryHref="/how-it-works"
+      secondaryLabel="How it works"
+      highlights={["Driver payment is separate", "Platform fees are separate", "No customer ordering"]}
+    />
+
+    <Section title="Current pricing position" intro="Final launch pricing will be confirmed before takeaways go live." tone="white">
+      <div class="grid gap-4 md:grid-cols-3">
+        <IconCard icon="pricing" title="Driver payment is separate" text="The takeaway offers the driver payment for a run. That payment is separate from EDD Hub platform fees." tone="brand" />
+        <IconCard icon="message" title="Platform fees are separate" text="EDD Hub platform pricing will be explained clearly before a takeaway goes live." tone="teal" />
+        <IconCard icon="shield" title="No customer ordering fees" text="Customers do not order or pay through EDD Hub, so customer marketplace charges do not apply." tone="gold" />
+      </div>
+    </Section>
+
+    <Section title="What takeaways should know" intro="EDD Hub is for overflow delivery coordination, not customer ordering or driver payout processing." tone="warm">
+      <div class="grid gap-3 text-sm font-bold leading-6 text-[#4a3731] md:grid-cols-2">
+        <p class="rounded-lg bg-[#fffaf3] p-4">The takeaway offers the driver payment for each run.</p>
+        <p class="rounded-lg bg-[#fffaf3] p-4">EDD Hub platform fees are separate from driver payment.</p>
+        <p class="rounded-lg bg-[#fffaf3] p-4">EDD Hub does not handle driver payouts at launch.</p>
+        <p class="rounded-lg bg-[#fffaf3] p-4">Customers do not order or pay through EDD Hub.</p>
+      </div>
+    </Section>
+
+    <CTASection
+      title="Need pricing details?"
+      text="Register takeaway interest and EDD Hub can explain the current pricing position before you go live."
+      primaryLabel="Register takeaway interest"
+      primaryHref="/contact#takeaway-enquiry"
+      secondaryLabel="For takeaways"
+      secondaryHref="/for-takeaways"
+    />
+  </main>
+</BaseLayout>

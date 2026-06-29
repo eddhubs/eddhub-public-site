@@ -1,0 +1,34 @@
+---
+import Button from "./Button.astro";
+
+interface Props {
+  title: string;
+  text: string;
+  primaryLabel?: string;
+  primaryHref?: string;
+  secondaryLabel?: string;
+  secondaryHref?: string;
+}
+
+const {
+  title,
+  text,
+  primaryLabel = "Register interest",
+  primaryHref = "/contact",
+  secondaryLabel,
+  secondaryHref
+} = Astro.props;
+---
+
+<section class="bg-[#301d14] py-14 text-[#fffaf3] sm:py-18">
+  <div class="mx-auto grid w-full max-w-6xl gap-6 px-4 sm:px-6 lg:grid-cols-[1.2fr_0.8fr] lg:items-center lg:px-8">
+    <div>
+      <h2 class="text-2xl font-extrabold sm:text-3xl">{title}</h2>
+      <p class="mt-3 max-w-2xl text-base leading-7 text-[#f4d9b2]">{text}</p>
+    </div>
+    <div class="flex flex-col gap-3 sm:flex-row lg:justify-end">
+      <Button href={primaryHref} variant="primary" class="border-[#fbb040] bg-[#fbb040] text-[#601d1d] hover:bg-[#ffd174]">{primaryLabel}</Button>
+      {secondaryLabel && secondaryHref ? <Button href={secondaryHref} variant="secondary">{secondaryLabel}</Button> : null}
+    </div>
+  </div>
+</section>

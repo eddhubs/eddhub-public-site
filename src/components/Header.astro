@@ -1,0 +1,70 @@
+---
+import Button from "./Button.astro";
+import { navLinks } from "../data/nav";
+import { site } from "../data/site";
+---
+
+<header class="sticky top-0 z-50 border-b border-[#a97c50]/18 bg-[#fffaf3]/90 backdrop-blur-md">
+  <div class="mx-auto flex min-h-18 w-full max-w-6xl items-center justify-between gap-3 px-4 sm:px-6 lg:px-8">
+    <a class="flex min-w-0 items-center gap-3" href="/" aria-label="EDD Hub home">
+      <img src="/images/brand/edd-logo-text.png" alt="EDD Hub" class="h-10 w-auto max-w-[8.5rem]" />
+    </a>
+
+    <nav aria-label="Primary navigation" class="hidden items-center gap-1 lg:flex">
+      {navLinks.map((link) => <a class="rounded-lg px-3 py-2 text-sm font-bold text-[#4a3731] hover:bg-[#f6f1e8] hover:text-[#601d1d]" href={link.href}>{link.label}</a>)}
+    </nav>
+
+    <div class="hidden items-center gap-2 lg:flex">
+      <a class="rounded-lg px-3 py-2 text-sm font-extrabold text-[#601d1d] hover:bg-[#f6f1e8]" href={site.loginUrl}>Login</a>
+      <Button href="/contact#general-enquiry" variant="primary" class="min-h-10 px-4 py-2">Contact EDD Hub</Button>
+    </div>
+
+    <div class="flex items-center gap-2 lg:hidden">
+      <Button href="/contact#general-enquiry" variant="primary" class="min-h-10 px-3 py-2 text-xs sm:text-sm">Contact</Button>
+      <button
+        id="site-menu-toggle"
+        aria-controls="mobile-menu"
+        aria-expanded="false"
+        aria-label="Open navigation menu"
+        class="inline-flex h-11 w-11 items-center justify-center rounded-lg border border-[#a97c50]/25 bg-[#fffaf3] text-[#601d1d]"
+        type="button"
+      >
+        <svg aria-hidden="true" class="h-6 w-6" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="2" viewBox="0 0 24 24">
+          <path d="M4 7h16" />
+          <path d="M4 12h16" />
+          <path d="M4 17h16" />
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  <div id="mobile-menu" class="border-t border-[#a97c50]/18 bg-[#fffaf3] px-4 py-4 shadow-[0_14px_34px_rgba(96,29,29,0.08)] lg:hidden" hidden>
+    <nav aria-label="Mobile navigation" class="mx-auto grid max-w-6xl gap-2">
+      {navLinks.map((link) => <a class="rounded-lg px-3 py-3 text-sm font-extrabold text-[#4a3731] hover:bg-[#f6f1e8] hover:text-[#601d1d]" href={link.href}>{link.label}</a>)}
+      <a class="rounded-lg px-3 py-3 text-sm font-extrabold text-[#601d1d] hover:bg-[#f6f1e8]" href={site.loginUrl}>Login</a>
+    </nav>
+  </div>
+</header>
+
+<script>
+  const toggle = document.getElementById("site-menu-toggle");
+  const menu = document.getElementById("mobile-menu");
+
+  toggle?.addEventListener("click", () => {
+    const isExpanded = toggle.getAttribute("aria-expanded") === "true";
+    toggle.setAttribute("aria-expanded", String(!isExpanded));
+    toggle.setAttribute("aria-label", isExpanded ? "Open navigation menu" : "Close navigation menu");
+
+    if (menu) {
+      menu.hidden = isExpanded;
+    }
+  });
+
+  menu?.querySelectorAll("a").forEach((link) => {
+    link.addEventListener("click", () => {
+      toggle?.setAttribute("aria-expanded", "false");
+      toggle?.setAttribute("aria-label", "Open navigation menu");
+      menu.hidden = true;
+    });
+  });
+</script>

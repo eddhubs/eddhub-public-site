@@ -1,0 +1,33 @@
+---
+import CTASection from "../../components/CTASection.astro";
+import IconCard from "../../components/IconCard.astro";
+import PageHero from "../../components/PageHero.astro";
+import Section from "../../components/Section.astro";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { seo } from "../../data/site";
+---
+
+<BaseLayout title={seo.perth.title} description={seo.perth.description} path={seo.perth.path}>
+  <main>
+    <PageHero
+      badge="Perth"
+      title="Overflow delivery support for Perth takeaways"
+      intro="Perth is the first local focus area for EDD Hub interest from takeaways and approved independent drivers."
+      primaryHref="/contact#takeaway-enquiry"
+      primaryLabel="Register Perth interest"
+      secondaryHref="/for-takeaways"
+      secondaryLabel="For takeaways"
+      highlights={["Takeaway interest", "Driver interest", "Careful rollout"]}
+    />
+
+    <Section title="Built around local pressure" intro="Perth is the initial rollout area for takeaways and independent drivers who want to register interest." tone="white">
+      <div class="grid gap-4 md:grid-cols-3">
+        <IconCard icon="takeaway" title="Perth takeaways" text="Register interest in overflow delivery support for busy local services." tone="brand" />
+        <IconCard icon="driver" title="Perth drivers" text="Register interest as an independent driver for reviewed onboarding when available." tone="green" />
+        <IconCard icon="location" title="Initial rollout area" text="EDD Hub is gathering Perth interest before making wider availability claims." tone="blue" />
+      </div>
+    </Section>
+
+    <CTASection title="Register interest in Perth" text="Tell EDD Hub whether you are a takeaway, driver or local partner contact." primaryLabel="Register takeaway interest" primaryHref="/contact#takeaway-enquiry" secondaryLabel="All locations" secondaryHref="/locations" />
+  </main>
+</BaseLayout>

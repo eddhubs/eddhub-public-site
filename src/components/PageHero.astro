@@ -1,0 +1,64 @@
+---
+import Badge from "./Badge.astro";
+import Button from "./Button.astro";
+
+interface Props {
+  eyebrow?: string;
+  title: string;
+  intro: string;
+  badge?: string;
+  highlights?: string[];
+  primaryLabel?: string;
+  primaryHref?: string;
+  secondaryLabel?: string;
+  secondaryHref?: string;
+}
+
+const {
+  eyebrow,
+  title,
+  intro,
+  badge,
+  highlights = [],
+  primaryLabel = "Register interest",
+  primaryHref = "/contact",
+  secondaryLabel,
+  secondaryHref
+} = Astro.props;
+---
+
+<section class="site-grid-bg relative overflow-hidden bg-[#f8f7f4]">
+  <img src="/images/brand/edd-logo-mascot.png" alt="" class="pointer-events-none absolute -right-16 top-8 hidden h-72 w-auto opacity-10 sm:block lg:right-10 lg:h-96" />
+  <div class="mx-auto w-full max-w-6xl px-4 py-10 sm:px-6 sm:py-16 lg:px-8">
+    <div class="max-w-3xl">
+      {badge ? <Badge tone="primary">{badge}</Badge> : null}
+      {eyebrow ? <p class="mt-5 text-sm font-extrabold text-[#a96f40]">{eyebrow}</p> : null}
+      <h1 class="mt-4 max-w-4xl text-[2.35rem] font-extrabold leading-[1.08] text-[#601d1d] sm:text-5xl lg:text-6xl">
+        {title}
+      </h1>
+      <p class="mt-5 max-w-2xl text-base leading-7 text-[#5d4c43] sm:text-lg">
+        {intro}
+      </p>
+      <div class="mt-7 flex flex-col gap-3 sm:flex-row">
+        <Button href={primaryHref}>{primaryLabel}</Button>
+        {secondaryLabel && secondaryHref ? <Button href={secondaryHref} variant="secondary">{secondaryLabel}</Button> : null}
+      </div>
+    </div>
+    {
+      highlights.length > 0 ? (
+        <div class="mt-8 flex max-w-4xl flex-wrap gap-3">
+          {highlights.map((highlight, index) => (
+            <span class:list={[
+              "rounded-full border px-4 py-2 text-sm font-extrabold",
+              index % 3 === 0 ? "border-[#a97c50]/18 bg-[#fffaf3] text-[#601d1d]" : "",
+              index % 3 === 1 ? "border-[#2f6f9f]/20 bg-[#e8f1f6] text-[#24587f]" : "",
+              index % 3 === 2 ? "border-[#2f8f5b]/20 bg-[#e7f4ec] text-[#236b43]" : ""
+            ]}>
+              {highlight}
+            </span>
+          ))}
+        </div>
+      ) : null
+    }
+  </div>
+</section>

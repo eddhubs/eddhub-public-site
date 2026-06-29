@@ -1,0 +1,37 @@
+---
+import Badge from "../components/Badge.astro";
+import Button from "../components/Button.astro";
+import PageHero from "../components/PageHero.astro";
+import Section from "../components/Section.astro";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { locations } from "../data/locations";
+import { seo } from "../data/site";
+---
+
+<BaseLayout title={seo.locations.title} description={seo.locations.description} path={seo.locations.path}>
+  <main>
+    <PageHero
+      badge="Local rollout"
+      title="EDD Hub locations"
+      intro="EDD Hub is starting locally and expanding carefully. Perth is the first focus area, with Dundee and Fife treated as waiting-list locations."
+      primaryHref="/contact#general-enquiry"
+      primaryLabel="Register local interest"
+      secondaryHref="/locations/perth"
+      secondaryLabel="Perth"
+      highlights={["Perth focus", "Dundee waiting list", "Fife waiting list"]}
+    />
+
+    <Section title="Current location areas" intro="EDD Hub is starting with careful local interest before making any wider availability claims." tone="white">
+      <div class="grid gap-4 md:grid-cols-3">
+        {locations.map((location) => (
+          <article class="rounded-lg border border-[#a97c50]/18 bg-[#fffaf3] p-5 shadow-[0_12px_30px_rgba(96,29,29,0.06)]">
+            <Badge tone={location.name === "Perth" ? "primary" : "waiting"}>{location.status}</Badge>
+            <h2 class="mt-4 text-xl font-extrabold text-[#601d1d]">{location.name}</h2>
+            <p class="mt-2 text-sm leading-6 text-[#5d4c43]">{location.intro}</p>
+            <Button href={location.href} variant="secondary" class="mt-5">{location.cta}</Button>
+          </article>
+        ))}
+      </div>
+    </Section>
+  </main>
+</BaseLayout>

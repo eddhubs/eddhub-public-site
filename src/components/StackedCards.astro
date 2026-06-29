@@ -1,0 +1,33 @@
+---
+interface StackCard {
+  title: string;
+  text: string;
+}
+
+interface Props {
+  cards: StackCard[];
+}
+
+const { cards } = Astro.props;
+---
+
+<div class="grid gap-4 md:gap-5">
+  {
+    cards.map((card, index) => (
+      <article
+        class="stacked-card rounded-lg border border-[#a97c50]/20 bg-[#fffaf3] p-5 shadow-[0_14px_34px_rgba(96,29,29,0.08)] md:p-6"
+        style={`--stack-index: ${index}`}
+      >
+        <div class="flex items-start gap-4">
+          <span class="mt-1 inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-[#601d1d] text-sm font-extrabold text-[#fffaf3]">
+            {index + 1}
+          </span>
+          <div>
+            <h3 class="text-lg font-extrabold text-[#601d1d]">{card.title}</h3>
+            <p class="mt-2 text-sm leading-6 text-[#5d4c43]">{card.text}</p>
+          </div>
+        </div>
+      </article>
+    ))
+  }
+</div>

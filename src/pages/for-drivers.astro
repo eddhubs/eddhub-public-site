@@ -1,0 +1,56 @@
+---
+import CTASection from "../components/CTASection.astro";
+import IconCard from "../components/IconCard.astro";
+import PageHero from "../components/PageHero.astro";
+import Section from "../components/Section.astro";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { seo } from "../data/site";
+---
+
+<BaseLayout title={seo.drivers.title} description={seo.drivers.description} path={seo.drivers.path}>
+  <main>
+    <PageHero
+      badge="For independent drivers"
+      title="Local delivery runs. Your choice whether to accept."
+      intro="Approved independent drivers can review available local delivery runs, see key details, and choose whether a run works for them."
+      primaryHref="/contact#driver-enquiry"
+      primaryLabel="Apply/register driver interest"
+      secondaryHref="/safety-and-trust"
+      secondaryLabel="Safety and trust"
+      highlights={["Independent driver choice", "Reviewed onboarding", "No guaranteed work"]}
+    />
+
+    <Section title="Driver choice stays central" intro="EDD Hub is not an employer and does not guarantee jobs or earnings. Drivers are reviewed before they can go online, and every run remains a choice." tone="white">
+      <div class="grid gap-4 md:grid-cols-3">
+        <IconCard icon="route" title="Review local runs" text="See the run information available in the app before deciding whether to accept." tone="teal" />
+        <IconCard icon="check" title="Choose whether to accept" text="Independent drivers are not promised work and are not required to accept every run." tone="green" />
+        <IconCard icon="shield" title="Onboarding review" text="Drivers are reviewed before becoming active and provide documents during onboarding." tone="brand" />
+      </div>
+    </Section>
+
+    <Section title="Driver onboarding" intro="Driver interest starts here. Required documents and checks are handled during onboarding, not through a general enquiry form." tone="warm">
+      <div class="grid gap-4 md:grid-cols-2">
+        <IconCard icon="list" title="No document uploads here" text="You will not be asked to upload insurance, right-to-work evidence or ID documents on this page." tone="gold" />
+        <IconCard icon="message" title="Start with interest" text="Register your interest first, then EDD Hub can explain the next onboarding steps." tone="blue" />
+      </div>
+    </Section>
+
+    <Section title="Good fit for" intro="EDD Hub is aimed at approved independent drivers who want local delivery opportunities they can assess before accepting." tone="white">
+      <div class="grid gap-3 text-sm font-bold leading-6 text-[#4a3731] md:grid-cols-2">
+        <p class="rounded-lg bg-[#fffaf3] p-4">Drivers who prefer local runs with clear collection and destination information.</p>
+        <p class="rounded-lg bg-[#fffaf3] p-4">Drivers who understand that work and earnings are not guaranteed.</p>
+        <p class="rounded-lg bg-[#fffaf3] p-4">Drivers willing to complete reviewed onboarding before becoming active.</p>
+        <p class="rounded-lg bg-[#fffaf3] p-4">Drivers who want to register interest in Perth, Dundee or Fife rollout areas.</p>
+      </div>
+    </Section>
+
+    <CTASection
+      title="Apply/register driver interest"
+      text="Share your name, town and contact details so EDD Hub can follow up about local driver onboarding."
+      primaryLabel="Apply/register driver interest"
+      primaryHref="/contact#driver-enquiry"
+      secondaryLabel="View locations"
+      secondaryHref="/locations"
+    />
+  </main>
+</BaseLayout>

@@ -1,0 +1,50 @@
+---
+import CTASection from "../components/CTASection.astro";
+import IconCard from "../components/IconCard.astro";
+import PageHero from "../components/PageHero.astro";
+import Section from "../components/Section.astro";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { seo } from "../data/site";
+---
+
+<BaseLayout title={seo.howItWorks.title} description={seo.howItWorks.description} path={seo.howItWorks.path}>
+  <main>
+    <PageHero
+      badge="Operational flow"
+      title="How EDD Hub works"
+      intro="EDD Hub helps takeaways create overflow delivery runs, share them with approved local drivers, and follow progress after a driver accepts."
+      primaryHref="/contact#takeaway-enquiry"
+      primaryLabel="Register takeaway interest"
+      secondaryHref="/for-takeaways"
+      secondaryLabel="For takeaways"
+      highlights={["Takeaways create runs", "Drivers choose suitable work", "Progress stays clear"]}
+    />
+
+    <Section title="For takeaways" intro="EDD Hub is designed for the moments when your takeaway needs extra delivery capacity around your existing order flow." tone="white">
+      <div class="grid gap-4 md:grid-cols-4">
+        <IconCard icon="takeaway" title="1. Create a run" text="Start a delivery run when your own driver capacity is stretched." tone="brand" />
+        <IconCard icon="message" title="2. Add key details" text="Share the collection, destination area, order references and any important handover notes." tone="gold" />
+        <IconCard icon="pricing" title="3. Set driver payment" text="Choose the payment offered to the driver for that run." tone="green" />
+        <IconCard icon="list" title="4. Follow progress" text="After a driver accepts, keep track of the run through the EDD Hub app." tone="blue" />
+      </div>
+    </Section>
+
+    <Section title="For drivers" intro="Independent drivers can register interest, complete the review steps, and only accept runs that suit them." tone="warm">
+      <div class="grid gap-4 md:grid-cols-4">
+        <IconCard icon="message" title="1. Register interest" text="Apply or register interest in an active or planned local area." tone="brand" />
+        <IconCard icon="shield" title="2. Complete onboarding" text="Provide the required information so EDD Hub can review your driver profile." tone="green" />
+        <IconCard icon="route" title="3. Review runs" text="Once approved and online in an active area, review available local delivery runs." tone="teal" />
+        <IconCard icon="check" title="4. Accept if suitable" text="Choose whether to accept, then collect and complete the delivery." tone="blue" />
+      </div>
+    </Section>
+
+    <CTASection
+      title="Not sure where you fit?"
+      text="Start with the contact page and choose takeaway, driver, general, or partnership/media enquiry."
+      primaryLabel="Contact EDD Hub"
+      primaryHref="/contact#general-enquiry"
+      secondaryLabel="Read FAQs"
+      secondaryHref="/faqs"
+    />
+  </main>
+</BaseLayout>

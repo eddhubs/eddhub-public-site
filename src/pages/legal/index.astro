@@ -1,0 +1,41 @@
+---
+import Button from "../../components/Button.astro";
+import PageHero from "../../components/PageHero.astro";
+import Section from "../../components/Section.astro";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { seo } from "../../data/site";
+
+const legalLinks = [
+  { href: "/legal/privacy-notice", label: "Privacy notice" },
+  { href: "/legal/cookie-notice", label: "Cookie notice" },
+  { href: "/legal/driver-terms", label: "Driver terms" },
+  { href: "/legal/takeaway-terms", label: "Takeaway terms" }
+];
+---
+
+<BaseLayout title={seo.legal.title} description={seo.legal.description} path={seo.legal.path}>
+  <main>
+    <PageHero
+      badge="Legal"
+      title="Legal"
+      intro="Legal pages are placeholders in this first coded pass. Final legal content must be approved before public launch."
+      primaryHref="/contact#forms"
+      primaryLabel="Contact EDD Hub"
+      secondaryHref="/"
+      secondaryLabel="Home"
+      highlights={["Placeholders only", "Owner review needed", "Before launch"]}
+    />
+
+    <Section title="Legal pages" intro="Do not treat these placeholders as final launch legal documents." tone="white">
+      <div class="grid gap-4 md:grid-cols-2">
+        {legalLinks.map((link) => (
+          <article class="rounded-lg border border-[#a97c50]/18 bg-[#fffaf3] p-5">
+            <h2 class="text-xl font-extrabold text-[#601d1d]">{link.label}</h2>
+            <p class="mt-2 text-sm leading-6 text-[#5d4c43]">This document will be added before public launch. For questions, contact info@eddhub.co.uk.</p>
+            <Button href={link.href} variant="secondary" class="mt-5">Open</Button>
+          </article>
+        ))}
+      </div>
+    </Section>
+  </main>
+</BaseLayout>

@@ -1,0 +1,33 @@
+---
+import CTASection from "../../components/CTASection.astro";
+import IconCard from "../../components/IconCard.astro";
+import PageHero from "../../components/PageHero.astro";
+import Section from "../../components/Section.astro";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { seo } from "../../data/site";
+---
+
+<BaseLayout title={seo.fife.title} description={seo.fife.description} path={seo.fife.path}>
+  <main>
+    <PageHero
+      badge="Waiting list"
+      title="EDD Hub Fife waiting list"
+      intro="Fife is treated as a future rollout area while takeaway and independent driver interest is reviewed."
+      primaryHref="/contact#general-enquiry"
+      primaryLabel="Join Fife waiting list"
+      secondaryHref="/locations"
+      secondaryLabel="All locations"
+      highlights={["Future rollout", "Local demand", "No availability promise"]}
+    />
+
+    <Section title="Future rollout interest" intro="The Fife page stays careful and practical until rollout status is confirmed." tone="white">
+      <div class="grid gap-4 md:grid-cols-3">
+        <IconCard icon="location" title="Local demand" text="EDD Hub is gathering interest from Fife takeaways and drivers before confirming availability." tone="blue" />
+        <IconCard icon="takeaway" title="Takeaway pressure" text="Local operators can explain where overflow delivery support would help." tone="brand" />
+        <IconCard icon="driver" title="Driver pool" text="Independent drivers can register interest without being promised work or earnings." tone="green" />
+      </div>
+    </Section>
+
+    <CTASection title="Join the Fife waiting list" text="Register early interest and EDD Hub can follow up when rollout planning is clearer." primaryLabel="Contact EDD Hub" primaryHref="/contact#general-enquiry" secondaryLabel="Dundee" secondaryHref="/locations/dundee" />
+  </main>
+</BaseLayout>

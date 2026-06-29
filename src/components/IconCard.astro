@@ -1,0 +1,56 @@
+---
+interface Props {
+  icon?: keyof typeof icons;
+  title: string;
+  text: string;
+  tone?: "brand" | "teal" | "gold" | "blue" | "green";
+  href?: string;
+}
+
+const icons = {
+  takeaway: ["M4 10h16", "M6 10l2-5h8l2 5", "M7 14h10", "M8 18h8", "M5 10v9h14v-9"],
+  driver: ["M5 16a3 3 0 1 0 6 0a3 3 0 0 0-6 0", "M13 16h5l2-5h-5l-2-5H8", "M8 16h5"],
+  route: ["M6 18c4-7 8-7 12-14", "M5 18h4", "M15 4h4v4"],
+  shield: ["M12 3l7 3v5c0 4.5-2.8 7.7-7 10-4.2-2.3-7-5.5-7-10V6l7-3Z", "M9 12l2 2 4-5"],
+  clock: ["M12 5a7 7 0 1 0 0 14 7 7 0 0 0 0-14", "M12 8v4l3 2"],
+  bundle: ["M7 6h10v5H7z", "M5 11h14v7H5z", "M8 14h8"],
+  handover: ["M5 13l4 4 10-10", "M4 7h8", "M4 10h6"],
+  location: ["M12 21s7-5.2 7-11a7 7 0 1 0-14 0c0 5.8 7 11 7 11Z", "M12 10.5h.01"],
+  message: ["M5 6h14v10H8l-3 3V6Z", "M8 10h8", "M8 13h5"],
+  pricing: ["M6 7h12v10H6z", "M8 10h8", "M8 14h5"],
+  check: ["M5 12l4 4L19 6"],
+  list: ["M8 7h11", "M8 12h11", "M8 17h11", "M4 7h.01", "M4 12h.01", "M4 17h.01"]
+};
+
+const {
+  icon = "check",
+  title,
+  text,
+  tone = "brand",
+  href
+} = Astro.props;
+
+const toneClasses = {
+  brand: "bg-[#fff4ee] text-[#601d1d]",
+  teal: "bg-[#e6f2ef] text-[#145149]",
+  gold: "bg-[#fff6df] text-[#7a542d]",
+  blue: "bg-[#e8f1f6] text-[#24587f]",
+  green: "bg-[#e7f4ec] text-[#236b43]"
+};
+
+const Tag = href ? "a" : "article";
+const linkProps = href ? { href } : {};
+const cardClasses =
+  "block rounded-lg border border-[#a97c50]/18 bg-[#fffaf3] p-5 shadow-[0_12px_30px_rgba(96,29,29,0.06)]" +
+  (href ? " transition duration-200 hover:-translate-y-1 hover:border-[#a97c50]/35 hover:bg-white" : "");
+---
+
+<Tag class={cardClasses} {...linkProps}>
+  <div class:list={["mb-4 inline-flex h-11 w-11 items-center justify-center rounded-lg", toneClasses[tone]]}>
+    <svg aria-hidden="true" class="h-6 w-6" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" viewBox="0 0 24 24">
+      {icons[icon].map((path) => <path d={path} />)}
+    </svg>
+  </div>
+  <h3 class="text-lg font-extrabold text-[#601d1d]">{title}</h3>
+  <p class="mt-2 text-sm leading-6 text-[#5d4c43]">{text}</p>
+</Tag>

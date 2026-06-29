@@ -1,0 +1,167 @@
+---
+import Badge from "../components/Badge.astro";
+import Button from "../components/Button.astro";
+import CTASection from "../components/CTASection.astro";
+import IconCard from "../components/IconCard.astro";
+import Section from "../components/Section.astro";
+import StackedCards from "../components/StackedCards.astro";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { locations } from "../data/locations";
+import { seo } from "../data/site";
+
+const stackedCards = [
+  {
+    title: "Busy night backup",
+    text: "Use EDD Hub when orders are moving but your own delivery capacity is stretched."
+  },
+  {
+    title: "Driver shortage support",
+    text: "Approved independent drivers can review available runs and choose whether to accept."
+  },
+  {
+    title: "Bundle delivery runs",
+    text: "Takeaways can group compatible drops into clearer, more efficient local runs."
+  },
+  {
+    title: "Clear collection handovers",
+    text: "Job references, destination areas and status changes keep the handover easier to follow."
+  },
+  {
+    title: "Progress stays clear",
+    text: "Takeaways and drivers can follow accepted delivery runs through the EDD Hub app."
+  }
+];
+---
+
+<BaseLayout title={seo.home.title} description={seo.home.description} path={seo.home.path}>
+  <main>
+    <section class="site-grid-bg relative overflow-hidden bg-[#f8f7f4]">
+      <img src="/images/brand/edd-logo-full.png" alt="" class="pointer-events-none absolute -right-24 top-10 hidden h-[28rem] w-auto opacity-10 md:block xl:right-12" />
+      <div class="mx-auto w-full max-w-6xl px-4 py-14 sm:px-6 sm:py-18 lg:px-8">
+        <div class="max-w-4xl">
+          <Badge tone="primary">Overflow delivery coordination</Badge>
+          <h1 class="mt-5 max-w-4xl text-4xl font-extrabold leading-tight text-[#601d1d] sm:text-5xl lg:text-6xl">
+            Extra delivery drivers when your takeaway needs them
+          </h1>
+          <p class="mt-5 max-w-2xl text-base leading-7 text-[#5d4c43] sm:text-lg">
+            EDD Hub connects takeaways needing short-notice delivery support with approved independent drivers in their local area.
+          </p>
+          <div class="mt-7 flex flex-col gap-3 sm:flex-row">
+            <Button href="/contact#takeaway-enquiry">Register takeaway interest</Button>
+            <Button href="/how-it-works" variant="secondary">See how it works</Button>
+          </div>
+          <div class="mt-8 grid gap-3 sm:grid-cols-3">
+            <div class="rounded-lg border border-[#a97c50]/18 bg-[#fffaf3] px-4 py-3">
+              <p class="text-sm font-extrabold text-[#601d1d]">For takeaways</p>
+              <p class="mt-1 text-xs leading-5 text-[#5d4c43]">Overflow help when your own drivers are stretched.</p>
+            </div>
+            <div class="rounded-lg border border-[#2f8f5b]/20 bg-[#e7f4ec] px-4 py-3">
+              <p class="text-sm font-extrabold text-[#236b43]">For drivers</p>
+              <p class="mt-1 text-xs leading-5 text-[#315f45]">Review local runs and choose whether to accept.</p>
+            </div>
+            <div class="rounded-lg border border-[#2f6f9f]/20 bg-[#e8f1f6] px-4 py-3">
+              <p class="text-sm font-extrabold text-[#24587f]">App separate</p>
+              <p class="mt-1 text-xs leading-5 text-[#49636b]">Operational login and job flows live at eddhub.app.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <Section
+      title="Built for two local audiences"
+      intro="EDD Hub is built for takeaway owners who need overflow delivery support and independent drivers who want to review local runs before accepting."
+      tone="white"
+    >
+      <div class="grid gap-4 md:grid-cols-2">
+        <IconCard icon="takeaway" title="For takeaways" text="Get a clearer way to request overflow delivery support when a busy service starts to outpace your own driver capacity." tone="brand" href="/for-takeaways" />
+        <IconCard icon="driver" title="For drivers" text="See local delivery opportunities with clear run details and decide whether a run works for you." tone="green" href="/for-drivers" />
+      </div>
+    </Section>
+
+    <Section
+      title="Built for real takeaway pressure"
+      intro="EDD Hub is shaped around the late rush, the missing driver, the bundled run and the need for a clean handover."
+      tone="warm"
+    >
+      <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        <IconCard icon="clock" title="Short-notice support" text="Designed for the moments when delivery capacity changes quickly." tone="gold" />
+        <IconCard icon="bundle" title="Single or bundled runs" text="Support for clearer local runs without marketplace browsing." tone="teal" />
+        <IconCard icon="handover" title="Collection handovers" text="Keep key run details visible before a driver collects." tone="blue" />
+        <IconCard icon="shield" title="Reviewed drivers" text="Drivers are reviewed before becoming active in the EDD Hub app." tone="green" />
+      </div>
+    </Section>
+
+    <Section
+      title="How EDD Hub works"
+      intro="Takeaways create delivery runs, approved drivers review the details, and accepted runs are followed through the EDD Hub app."
+      tone="white"
+    >
+      <div class="grid gap-4 md:grid-cols-3">
+        <IconCard icon="message" title="1. Takeaway needs capacity" text="A takeaway uses EDD Hub when its own delivery setup needs extra support." tone="brand" />
+        <IconCard icon="route" title="2. Drivers review runs" text="Approved independent drivers can see available run details and choose whether to accept." tone="teal" />
+        <IconCard icon="list" title="3. Progress is followed" text="Accepted runs can be followed through the EDD Hub app from collection to completion." tone="blue" />
+      </div>
+    </Section>
+
+    <Section
+      title="Where EDD Hub fits"
+      intro="The service is not a customer marketplace. It is practical coordination for local overflow delivery moments."
+      tone="warm"
+    >
+      <StackedCards cards={stackedCards} />
+    </Section>
+
+    <Section
+      title="Trust and control"
+      intro="EDD Hub is designed to make overflow delivery easier to coordinate without overstating guarantees."
+      tone="white"
+    >
+      <div class="grid gap-4 md:grid-cols-3">
+        <IconCard icon="shield" title="No false guarantees" text="EDD Hub does not guarantee drivers, delivery times, jobs or earnings." tone="brand" />
+        <IconCard icon="check" title="Driver review" text="Drivers are reviewed before becoming active and provide documents during onboarding." tone="green" />
+        <IconCard icon="message" title="Issue visibility" text="Operational issues can be recorded and reviewed through the app workflow." tone="blue" />
+      </div>
+    </Section>
+
+    <Section
+      title="Starting locally, expanding carefully"
+      intro="EDD Hub is building around real local demand first, then opening waiting lists for nearby areas."
+      tone="warm"
+    >
+      <div class="grid gap-4 md:grid-cols-3">
+        {locations.map((location) => (
+          <a class="rounded-lg border border-[#a97c50]/18 bg-[#fffaf3] p-5 shadow-[0_12px_30px_rgba(96,29,29,0.06)] transition hover:-translate-y-1 hover:border-[#a97c50]/35 hover:bg-white" href={location.href}>
+            <Badge tone={location.name === "Perth" ? "primary" : "waiting"}>{location.status}</Badge>
+            <h3 class="mt-4 text-lg font-extrabold text-[#601d1d]">{location.name}</h3>
+            <p class="mt-2 text-sm leading-6 text-[#5d4c43]">{location.intro}</p>
+          </a>
+        ))}
+      </div>
+    </Section>
+
+    <Section title="Choose your next step" intro="Takeaways and drivers need different information before registering interest." tone="white">
+      <div class="grid gap-4 md:grid-cols-2">
+        <div class="rounded-lg border border-[#a97c50]/18 bg-[#fffaf3] p-6">
+          <h2 class="text-2xl font-extrabold text-[#601d1d]">For takeaways</h2>
+          <p class="mt-3 text-sm leading-6 text-[#5d4c43]">See how overflow support fits around your existing delivery operation.</p>
+          <Button href="/for-takeaways" variant="secondary" class="mt-5">Takeaway information</Button>
+        </div>
+        <div class="rounded-lg border border-[#2f8f5b]/20 bg-[#e7f4ec] p-6">
+          <h2 class="text-2xl font-extrabold text-[#236b43]">For drivers</h2>
+          <p class="mt-3 text-sm leading-6 text-[#315f45]">Understand the independent driver flow and register interest locally.</p>
+          <Button href="/for-drivers" variant="dark" class="mt-5">Driver information</Button>
+        </div>
+      </div>
+    </Section>
+
+    <CTASection
+      title="Ready to register interest?"
+      text="Tell EDD Hub whether you are a takeaway, independent driver, or partner contact so the right person can follow up."
+      primaryLabel="Register takeaway interest"
+      primaryHref="/contact#takeaway-enquiry"
+      secondaryLabel="View locations"
+      secondaryHref="/locations"
+    />
+  </main>
+</BaseLayout>

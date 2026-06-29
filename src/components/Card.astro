@@ -1,0 +1,27 @@
+---
+interface Props {
+  href?: string;
+  class?: string;
+}
+
+const { href, class: className = "" } = Astro.props;
+const classes = [
+  "rounded-lg border border-[#a97c50]/18 bg-[#fffaf3] p-5 shadow-[0_12px_30px_rgba(96,29,29,0.06)]",
+  href ? "transition duration-200 hover:-translate-y-1 hover:border-[#a97c50]/35 hover:bg-white" : "",
+  className
+]
+  .filter(Boolean)
+  .join(" ");
+---
+
+{
+  href ? (
+    <a class={classes} href={href}>
+      <slot />
+    </a>
+  ) : (
+    <article class={classes}>
+      <slot />
+    </article>
+  )
+}

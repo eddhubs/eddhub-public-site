@@ -1,0 +1,22 @@
+---
+interface Props {
+  tone?: "brand" | "primary" | "success" | "info" | "waiting" | "neutral" | "danger";
+  class?: string;
+}
+
+const { tone = "neutral", class: className = "" } = Astro.props;
+
+const tones = {
+  brand: "border-[#601d1d]/20 bg-[#601d1d] text-[#fffaf3]",
+  primary: "border-[#fbb040]/45 bg-[#fbb040] text-[#601d1d]",
+  success: "border-[#2f8f5b]/20 bg-[#e7f4ec] text-[#236b43]",
+  info: "border-[#2f6f9f]/20 bg-[#e8f1f6] text-[#24587f]",
+  waiting: "border-[#a97c50]/28 bg-[#fff6df] text-[#7a542d]",
+  neutral: "border-[#a97c50]/18 bg-[#f6f1e8] text-[#5d4c43]",
+  danger: "border-[#aa2727]/20 bg-[#fff4ee] text-[#aa2727]"
+};
+---
+
+<span class:list={["inline-flex rounded-full border px-3 py-1 text-xs font-extrabold", tones[tone], className]}>
+  <slot />
+</span>

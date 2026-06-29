@@ -1,0 +1,109 @@
+---
+import ContactForm from "../components/ContactForm.astro";
+import Button from "../components/Button.astro";
+import PageHero from "../components/PageHero.astro";
+import Section from "../components/Section.astro";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { seo, site } from "../data/site";
+
+const basicFields = [
+  { name: "name", label: "Name", autocomplete: "name" },
+  { name: "email", label: "Email", type: "email", autocomplete: "email" },
+  { name: "message", label: "Message", textarea: true, autocomplete: "off" }
+] as const;
+
+const takeawayFields = [
+  { name: "name", label: "Name", autocomplete: "name" },
+  { name: "businessName", label: "Business name", autocomplete: "organization" },
+  { name: "cityTown", label: "City/town", autocomplete: "address-level2" },
+  { name: "phone", label: "Phone", type: "tel", autocomplete: "tel" },
+  { name: "email", label: "Email", type: "email", autocomplete: "email" },
+  { name: "message", label: "Message", textarea: true, autocomplete: "off" }
+] as const;
+
+const driverFields = [
+  { name: "name", label: "Name", autocomplete: "name" },
+  { name: "cityTown", label: "City/town", autocomplete: "address-level2" },
+  { name: "phone", label: "Phone", type: "tel", autocomplete: "tel" },
+  { name: "email", label: "Email", type: "email", autocomplete: "email" },
+  { name: "message", label: "Message", textarea: true, autocomplete: "off" }
+] as const;
+
+const partnerFields = [
+  { name: "name", label: "Name", autocomplete: "name" },
+  { name: "organisation", label: "Organisation", autocomplete: "organization" },
+  { name: "email", label: "Email", type: "email", autocomplete: "email" },
+  { name: "message", label: "Message", textarea: true, autocomplete: "off" }
+] as const;
+
+const enquiryCards = [
+  {
+    title: "Takeaway enquiry",
+    text: "For takeaways and restaurants interested in overflow delivery support.",
+    href: "#takeaway-enquiry",
+    cta: "Register takeaway interest"
+  },
+  {
+    title: "Driver enquiry",
+    text: "For independent drivers who want to apply or register interest locally.",
+    href: "#driver-enquiry",
+    cta: "Apply/register driver interest"
+  },
+  {
+    title: "General enquiry",
+    text: "For questions about EDD Hub, availability or local rollout.",
+    href: "#general-enquiry",
+    cta: "Contact EDD Hub"
+  },
+  {
+    title: "Partnership/media enquiry",
+    text: "For councils, partners, investors, insurers and local press.",
+    href: "#partnership-enquiry",
+    cta: "Partnership/media enquiry"
+  }
+] as const;
+---
+
+<BaseLayout title={seo.contact.title} description={seo.contact.description} path={seo.contact.path}>
+  <main>
+    <PageHero
+      badge="Contact"
+      title="Contact EDD Hub"
+      intro="Register interest as a takeaway or independent driver, or contact EDD Hub about rollout, partnerships or media enquiries."
+      primaryHref={`mailto:${site.email}`}
+      primaryLabel="Email EDD Hub"
+      secondaryHref="/faqs"
+      secondaryLabel="Read FAQs"
+      highlights={["Takeaway interest", "Driver interest", "Direct email"]}
+    />
+
+    <Section title="Choose the right enquiry" intro="Pick the option that best matches why you are contacting EDD Hub." tone="white">
+      <div class="grid gap-4 md:grid-cols-2">
+        {enquiryCards.map((card) => (
+          <a class="rounded-lg border border-[#a97c50]/18 bg-[#fffaf3] p-5 shadow-[0_12px_30px_rgba(96,29,29,0.06)] transition hover:-translate-y-1 hover:border-[#a97c50]/35 hover:bg-white" href={card.href}>
+            <h2 class="text-xl font-extrabold text-[#601d1d]">{card.title}</h2>
+            <p class="mt-2 text-sm leading-6 text-[#5d4c43]">{card.text}</p>
+            <span class="mt-4 inline-flex text-sm font-extrabold text-[#601d1d] underline">{card.cta}</span>
+          </a>
+        ))}
+      </div>
+    </Section>
+
+    <Section id="forms" title="Enquiry forms" intro="Share a few details and EDD Hub will follow up with the right next step." tone="warm">
+      <div class="grid gap-5 lg:grid-cols-2">
+        <ContactForm id="takeaway-enquiry" title="Takeaway enquiry" intro="For takeaways and restaurants interested in overflow delivery support." fields={takeawayFields} />
+        <ContactForm id="driver-enquiry" title="Driver enquiry" intro="For independent drivers who want to apply or register interest in local delivery runs." fields={driverFields} />
+        <ContactForm id="general-enquiry" title="General enquiry" intro="For general questions about EDD Hub and local rollout." fields={basicFields} />
+        <ContactForm id="partnership-enquiry" title="Partnership/media enquiry" intro="For councils, partners, insurers, investors or local press." fields={partnerFields} />
+      </div>
+    </Section>
+
+    <Section title="Direct contact" intro="You can also contact EDD Hub directly by email." tone="warm">
+      <div class="rounded-lg border border-[#a97c50]/18 bg-[#fffaf3] p-5 text-sm font-bold leading-6 text-[#4a3731]">
+        <p>Email: <a class="text-[#601d1d] underline" href={`mailto:${site.email}`}>{site.email}</a></p>
+        <p class="mt-2">Location: Perth, Scotland</p>
+        <Button href={`mailto:${site.email}`} class="mt-5">Email EDD Hub</Button>
+      </div>
+    </Section>
+  </main>
+</BaseLayout>

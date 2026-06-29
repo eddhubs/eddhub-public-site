@@ -1,0 +1,48 @@
+---
+interface Field {
+  name: string;
+  label: string;
+  type?: "text" | "email" | "tel";
+  textarea?: boolean;
+  autocomplete?: string;
+}
+
+interface Props {
+  id: string;
+  title: string;
+  intro: string;
+  fields: readonly Field[];
+}
+
+const { id, title, intro, fields } = Astro.props;
+const noteId = `${id}-status`;
+---
+
+<form id={id} class="scroll-mt-24 rounded-lg border border-[#a97c50]/18 bg-[#fffaf3] p-5 shadow-[0_12px_30px_rgba(96,29,29,0.06)]" aria-describedby={noteId}>
+  <h2 class="text-xl font-extrabold text-[#601d1d]">{title}</h2>
+  <p class="mt-2 text-sm leading-6 text-[#5d4c43]">{intro}</p>
+  <div class="mt-5 grid gap-4">
+    {
+      fields.map((field) => (
+        <label class="grid gap-2 text-sm font-bold text-[#4a3731]">
+          <span>{field.label}</span>
+          {field.textarea ? (
+            <textarea autocomplete={field.autocomplete} class="min-h-28 rounded-lg border border-[#a97c50]/25 bg-white px-3 py-3 text-base text-[#171717] outline-none transition focus:border-[#601d1d] focus:ring-2 focus:ring-[#fbb040]/35" name={field.name}></textarea>
+          ) : (
+            <input autocomplete={field.autocomplete} class="min-h-11 rounded-lg border border-[#a97c50]/25 bg-white px-3 py-2 text-base text-[#171717] outline-none transition focus:border-[#601d1d] focus:ring-2 focus:ring-[#fbb040]/35" name={field.name} type={field.type ?? "text"} />
+          )}
+        </label>
+      ))
+    }
+  </div>
+  <p class="mt-4 text-xs leading-5 text-[#6e5a4f]">
+    EDD Hub may contact you about your enquiry.
+    <a class="font-extrabold text-[#601d1d] underline" href="/legal/privacy-notice"> Privacy Notice</a>
+  </p>
+  <p id={noteId} class="mt-3 rounded-lg border border-[#a97c50]/18 bg-[#f6f1e8] px-3 py-2 text-xs font-bold leading-5 text-[#5d4c43]">
+    If the form does not send, email us at <a class="text-[#601d1d] underline" href="mailto:info@eddhub.co.uk">info@eddhub.co.uk</a>.
+  </p>
+  <a class="mt-4 inline-flex min-h-11 w-full items-center justify-center rounded-[10px] border border-[#601d1d] bg-[#601d1d] px-5 py-3 text-center text-sm font-extrabold text-[#fffaf3] transition hover:bg-[#4c1616] sm:w-auto" href="mailto:info@eddhub.co.uk">
+    Email EDD Hub instead
+  </a>
+</form>
