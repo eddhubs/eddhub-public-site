@@ -42,7 +42,13 @@ npm run preview
 ## Legal Documents
 
 - Public legal PDFs are stored in `public/legal/`.
-- Legal pages summarise each document and link to the controlled PDF.
+- The public website currently exposes only the four core public legal PDFs:
+  - Driver Terms and Conditions
+  - Takeaway / Restaurant Terms and Conditions
+  - Privacy Notice
+  - Cookie Notice
+- The wider legal pack remains stored separately and should only be added to the public website if explicitly approved.
+- Legal pages summarise each public website document and link to the controlled PDF.
 - DOCX files are not used on the public website.
 - Legal documents must be reviewed and replaced when new versions are issued.
 - The public site is not legal advice; the PDF versions control the documents.
