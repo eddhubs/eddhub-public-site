@@ -38,61 +38,87 @@ const partnerFields = [
 
 const enquiryCards = [
   {
+    id: "takeaway-enquiry",
     title: "Takeaway enquiry",
-    text: "For takeaways and restaurants interested in overflow delivery support.",
+    label: "Register takeaway interest",
+    text: "For takeaway owners or managers who want to use EDD Hub for overflow delivery support.",
     href: "#takeaway-enquiry",
-    cta: "Register interest"
+    tone: "brand"
   },
   {
+    id: "driver-enquiry",
     title: "Driver enquiry",
-    text: "For independent drivers who want to register interest locally.",
+    label: "Register driver interest",
+    text: "For independent drivers who want to hear about local EDD Hub rollout and driver onboarding.",
     href: "#driver-enquiry",
-    cta: "Register driver interest"
+    tone: "green"
   },
   {
+    id: "general-enquiry",
     title: "General enquiry",
-    text: "For questions about EDD Hub, availability or local rollout.",
+    label: "General enquiry",
+    text: "For general questions about EDD Hub, local rollout or how the service works.",
     href: "#general-enquiry",
-    cta: "Contact EDD Hub"
+    tone: "gold"
   },
   {
-    title: "Partnership/media enquiry",
-    text: "For councils, partners, investors, insurers and local press.",
+    id: "partnership-enquiry",
+    title: "Partnership or media enquiry",
+    label: "Partnership or media enquiry",
+    text: "For partnerships, local press, insurance, councils, business support or other external enquiries.",
     href: "#partnership-enquiry",
-    cta: "Partnership/media enquiry"
+    tone: "blue"
   }
 ] as const;
+
+const toneClasses = {
+  brand: "border-[#a97c50]/18 bg-[#fffaf3]",
+  green: "border-[#2f8f5b]/22 bg-[#e7f4ec]",
+  gold: "border-[#fbb040]/45 bg-[#fff6df]",
+  blue: "border-[#2f6f9f]/20 bg-[#e8f1f6]"
+};
 ---
 
 <BaseLayout title={seo.contact.title} description={seo.contact.description} path={seo.contact.path}>
   <main>
     <PageHero
       title="Contact EDD Hub"
-      intro="Register interest as a takeaway or independent driver, or contact EDD Hub about rollout, partnerships or media enquiries."
-      primaryHref={`mailto:${site.email}`}
-      primaryLabel="Email EDD Hub"
-      secondaryHref="/faqs"
-      secondaryLabel="Read FAQs"
+      intro="Choose the enquiry that fits what you need and EDD Hub will show the right form on this page."
     />
 
-    <Section title="Choose the right enquiry" intro="Pick the option that best matches why you are contacting EDD Hub." tone="white">
+    <Section title="Choose the right enquiry" intro="Select the option that best matches what you need. We'll show the right form without sending you to a different page." tone="white">
       <div class="grid gap-4 md:grid-cols-2">
         {enquiryCards.map((card) => (
-          <a class="rounded-lg border border-[#a97c50]/18 bg-[#fffaf3] p-5 shadow-[0_12px_30px_rgba(96,29,29,0.06)] transition hover:-translate-y-1 hover:border-[#a97c50]/35 hover:bg-white" href={card.href}>
+          <a
+            class:list={[
+              "enquiry-option rounded-lg border p-5 shadow-[0_12px_30px_rgba(96,29,29,0.06)] transition hover:-translate-y-1 hover:border-[#a97c50]/45 hover:bg-white focus:outline-none focus-visible:ring-2 focus-visible:ring-[#fbb040] focus-visible:ring-offset-2",
+              toneClasses[card.tone]
+            ]}
+            href={card.href}
+            data-enquiry-trigger
+            data-enquiry-target={card.id}
+            aria-controls={card.id}
+            aria-expanded="false"
+          >
             <h2 class="text-xl font-extrabold text-[#601d1d]">{card.title}</h2>
             <p class="mt-2 text-sm leading-6 text-[#5d4c43]">{card.text}</p>
-            <span class="mt-4 inline-flex text-sm font-extrabold text-[#601d1d] underline">{card.cta}</span>
+            <span class="option-action mt-4 inline-flex rounded-[10px] border border-[#601d1d] bg-[#601d1d] px-4 py-2 text-sm font-extrabold text-[#fffaf3] transition">
+              {card.label}
+            </span>
           </a>
         ))}
       </div>
     </Section>
 
-    <Section id="forms" title="Enquiry forms" intro="Share a few details and EDD Hub will follow up with the right next step." tone="warm">
-      <div class="grid gap-5 lg:grid-cols-2">
-        <ContactForm id="takeaway-enquiry" title="Takeaway enquiry" intro="For takeaways and restaurants interested in overflow delivery support." fields={takeawayFields} />
-        <ContactForm id="driver-enquiry" title="Driver enquiry" intro="For independent drivers who want to apply or register interest in local delivery runs." fields={driverFields} />
-        <ContactForm id="general-enquiry" title="General enquiry" intro="For general questions about EDD Hub and local rollout." fields={basicFields} />
-        <ContactForm id="partnership-enquiry" title="Partnership/media enquiry" intro="For councils, partners, insurers, investors or local press." fields={partnerFields} />
+    <Section id="contact-form-area" title="Selected enquiry" intro="Choose an option above to open the matching form." tone="warm">
+      <div data-contact-placeholder class="rounded-lg border border-[#a97c50]/18 bg-[#fffaf3] p-5 text-sm font-bold leading-6 text-[#5d4c43]">
+        Choose an enquiry option above and the right form will open here.
+      </div>
+      <div class="grid gap-5">
+        <ContactForm id="takeaway-enquiry" title="Takeaway enquiry form" intro="For takeaway owners or managers who want to use EDD Hub for overflow delivery support." fields={takeawayFields} hidden />
+        <ContactForm id="driver-enquiry" title="Driver enquiry form" intro="For independent drivers who want to hear about local EDD Hub rollout and driver onboarding." fields={driverFields} hidden />
+        <ContactForm id="general-enquiry" title="General enquiry form" intro="For general questions about EDD Hub, local rollout or how the service works." fields={basicFields} hidden />
+        <ContactForm id="partnership-enquiry" title="Partnership or media enquiry form" intro="For partnerships, local press, insurance, councils, business support or other external enquiries." fields={partnerFields} hidden />
       </div>
     </Section>
 
@@ -104,4 +130,77 @@ const enquiryCards = [
       </div>
     </Section>
   </main>
+
+  <style>
+    .enquiry-option[aria-expanded="true"] {
+      border-color: #601d1d;
+      background: #fffaf3;
+      box-shadow: 0 18px 42px rgba(96, 29, 29, 0.14);
+      transform: translateY(-2px);
+    }
+
+    .enquiry-option[aria-expanded="true"] .option-action {
+      border-color: #fbb040;
+      background: #fbb040;
+      color: #601d1d;
+    }
+  </style>
+
+  <script>
+    type EnquiryOptions = { updateHash?: boolean; scroll?: boolean };
+
+    const enquiryIds = ["takeaway-enquiry", "driver-enquiry", "general-enquiry", "partnership-enquiry"];
+    const triggers = Array.from(document.querySelectorAll<HTMLElement>("[data-enquiry-trigger]"));
+    const panels = Array.from(document.querySelectorAll<HTMLElement>("[data-enquiry-panel]"));
+    const placeholder = document.querySelector<HTMLElement>("[data-contact-placeholder]");
+
+    function openEnquiry(id: string | null, options: EnquiryOptions = {}) {
+      const selectedId = typeof id === "string" && enquiryIds.includes(id) ? id : "";
+
+      triggers.forEach((trigger) => {
+        const isSelected = trigger.getAttribute("data-enquiry-target") === selectedId;
+        trigger.setAttribute("aria-expanded", String(isSelected));
+      });
+
+      panels.forEach((panel) => {
+        panel.toggleAttribute("hidden", panel.id !== selectedId);
+      });
+
+      if (placeholder) {
+        placeholder.toggleAttribute("hidden", Boolean(selectedId));
+      }
+
+      if (!selectedId) {
+        return;
+      }
+
+      if (options.updateHash && window.location.hash !== `#${selectedId}`) {
+        history.pushState(null, "", `#${selectedId}`);
+      }
+
+      const selectedPanel = document.getElementById(selectedId);
+
+      if (options.scroll && selectedPanel) {
+        window.requestAnimationFrame(() => {
+          selectedPanel.scrollIntoView({ block: "start", behavior: "smooth" });
+          selectedPanel.focus({ preventScroll: true });
+        });
+      }
+    }
+
+    function openFromHash(shouldScroll = false) {
+      const id = decodeURIComponent(window.location.hash.replace("#", ""));
+      openEnquiry(id, { scroll: shouldScroll });
+    }
+
+    triggers.forEach((trigger) => {
+      trigger.addEventListener("click", (event) => {
+        event.preventDefault();
+        openEnquiry(trigger.getAttribute("data-enquiry-target"), { updateHash: true, scroll: true });
+      });
+    });
+
+    window.addEventListener("hashchange", () => openFromHash(true));
+    openFromHash(Boolean(window.location.hash));
+  </script>
 </BaseLayout>

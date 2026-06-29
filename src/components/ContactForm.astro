@@ -12,14 +12,16 @@ interface Props {
   title: string;
   intro: string;
   fields: readonly Field[];
+  hidden?: boolean;
 }
 
-const { id, title, intro, fields } = Astro.props;
+const { id, title, intro, fields, hidden = false } = Astro.props;
+const headingId = `${id}-heading`;
 const noteId = `${id}-status`;
 ---
 
-<form id={id} class="scroll-mt-24 rounded-lg border border-[#a97c50]/18 bg-[#fffaf3] p-5 shadow-[0_12px_30px_rgba(96,29,29,0.06)]" aria-describedby={noteId}>
-  <h2 class="text-xl font-extrabold text-[#601d1d]">{title}</h2>
+<form id={id} class="scroll-mt-24 rounded-lg border border-[#a97c50]/18 bg-[#fffaf3] p-5 shadow-[0_12px_30px_rgba(96,29,29,0.06)]" aria-describedby={noteId} aria-labelledby={headingId} data-enquiry-panel hidden={hidden} tabindex="-1">
+  <h2 id={headingId} class="text-xl font-extrabold text-[#601d1d]">{title}</h2>
   <p class="mt-2 text-sm leading-6 text-[#5d4c43]">{intro}</p>
   <div class="mt-5 grid gap-4">
     {
