@@ -36,9 +36,9 @@ export const seo = {
     path: "/how-it-works"
   },
   pricing: {
-    title: "Pricing | EDD Hub overflow delivery support",
+    title: "Pricing | EDD Hub delivery support plans",
     description:
-      "Learn how EDD Hub separates takeaway platform fees from driver payments for overflow delivery support.",
+      "Compare EDD Hub launch pricing, subscribed platform fees and no-subscription pricing for takeaway overflow delivery support.",
     path: "/pricing"
   },
   locations: {
