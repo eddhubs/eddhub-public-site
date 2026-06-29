@@ -10,14 +10,12 @@ import { seo } from "../data/site";
 <BaseLayout title={seo.takeaways.title} description={seo.takeaways.description} path={seo.takeaways.path}>
   <main>
     <PageHero
-      badge="For takeaways"
       title="Delivery backup for busy takeaway nights"
-      intro="EDD Hub helps takeaways access overflow delivery support from approved independent drivers when their own delivery capacity is stretched."
+      intro="EDD Hub helps takeaways request extra local delivery support when orders are ready but normal driver capacity is stretched."
       primaryHref="/contact#takeaway-enquiry"
-      primaryLabel="Register takeaway interest"
+      primaryLabel="Register interest"
       secondaryHref="/how-it-works"
       secondaryLabel="See the flow"
-      highlights={["Existing ordering stays with you", "Single or bundled runs", "No customer marketplace"]}
     />
 
     <Section title="Use EDD Hub around your existing operation" intro="The platform is designed to support your delivery pressure, not replace how your takeaway receives orders." tone="white">
@@ -35,19 +33,31 @@ import { seo } from "../data/site";
       </div>
     </Section>
 
-    <Section title="Good fit for" intro="EDD Hub is most useful when your takeaway already has orders and needs a clearer way to access extra local delivery capacity." tone="white">
-      <div class="grid gap-3 text-sm font-bold leading-6 text-[#4a3731] md:grid-cols-2">
-        <p class="rounded-lg bg-[#fffaf3] p-4">Friday and Saturday pressure where your own driver rota is tight.</p>
-        <p class="rounded-lg bg-[#fffaf3] p-4">Short-notice sickness, holidays or unexpected delivery demand.</p>
-        <p class="rounded-lg bg-[#fffaf3] p-4">Local runs where clear collection and destination handover matters.</p>
-        <p class="rounded-lg bg-[#fffaf3] p-4">Takeaways that want overflow support without changing their own ordering setup.</p>
+    <Section title="Good fit for" intro="EDD Hub is most useful when you already have the orders and need a clean way to move them." tone="white">
+      <div class="grid gap-4 md:grid-cols-2">
+        <article class="rounded-lg border border-[#eadfce] bg-[#fffaf3] p-5">
+          <h2 class="text-lg font-extrabold text-[#601d1d]">Weekend pressure</h2>
+          <p class="mt-2 text-sm leading-6 text-[#5d4c43]">When Friday or Saturday orders build faster than your regular drivers can clear them.</p>
+        </article>
+        <article class="rounded-lg border border-[#eadfce] bg-[#fffaf3] p-5">
+          <h2 class="text-lg font-extrabold text-[#601d1d]">Driver absence</h2>
+          <p class="mt-2 text-sm leading-6 text-[#5d4c43]">When someone calls off, runs late or cannot cover the full shift.</p>
+        </article>
+        <article class="rounded-lg border border-[#eadfce] bg-[#fffaf3] p-5">
+          <h2 class="text-lg font-extrabold text-[#601d1d]">Bundle runs</h2>
+          <p class="mt-2 text-sm leading-6 text-[#5d4c43]">When two, three or four drops can be cleared in one run instead of waiting around.</p>
+        </article>
+        <article class="rounded-lg border border-[#eadfce] bg-[#fffaf3] p-5">
+          <h2 class="text-lg font-extrabold text-[#601d1d]">Temporary backup</h2>
+          <p class="mt-2 text-sm leading-6 text-[#5d4c43]">When you need extra capacity for one pressure point, not another permanent driver on every shift.</p>
+        </article>
       </div>
     </Section>
 
     <CTASection
       title="Tell EDD Hub about your takeaway"
       text="Register interest and share your city, business name and the delivery pressure you want help with."
-      primaryLabel="Register takeaway interest"
+      primaryLabel="Register interest"
       primaryHref="/contact#takeaway-enquiry"
       secondaryLabel="Pricing"
       secondaryHref="/pricing"

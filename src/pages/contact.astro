@@ -41,13 +41,13 @@ const enquiryCards = [
     title: "Takeaway enquiry",
     text: "For takeaways and restaurants interested in overflow delivery support.",
     href: "#takeaway-enquiry",
-    cta: "Register takeaway interest"
+    cta: "Register interest"
   },
   {
     title: "Driver enquiry",
-    text: "For independent drivers who want to apply or register interest locally.",
+    text: "For independent drivers who want to register interest locally.",
     href: "#driver-enquiry",
-    cta: "Apply/register driver interest"
+    cta: "Register driver interest"
   },
   {
     title: "General enquiry",
@@ -67,14 +67,12 @@ const enquiryCards = [
 <BaseLayout title={seo.contact.title} description={seo.contact.description} path={seo.contact.path}>
   <main>
     <PageHero
-      badge="Contact"
       title="Contact EDD Hub"
       intro="Register interest as a takeaway or independent driver, or contact EDD Hub about rollout, partnerships or media enquiries."
       primaryHref={`mailto:${site.email}`}
       primaryLabel="Email EDD Hub"
       secondaryHref="/faqs"
       secondaryLabel="Read FAQs"
-      highlights={["Takeaway interest", "Driver interest", "Direct email"]}
     />
 
     <Section title="Choose the right enquiry" intro="Pick the option that best matches why you are contacting EDD Hub." tone="white">

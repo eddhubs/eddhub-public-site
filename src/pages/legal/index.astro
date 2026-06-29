@@ -17,14 +17,8 @@ const documentsByGroup = legalGroups
 <BaseLayout title={seo.legal.title} description={seo.legal.description} path={seo.legal.path}>
   <main>
     <PageHero
-      badge="Legal"
       title="Legal documents"
       intro="Access the core EDD Hub legal documents for drivers, takeaways and website visitors."
-      primaryHref="/legal/privacy-notice"
-      primaryLabel="Privacy notice"
-      secondaryHref="/"
-      secondaryLabel="Home"
-      highlights={["Core website PDFs", "Effective 29 June 2026", "EDD HUB LTD"]}
     />
 
     {
@@ -38,7 +32,7 @@ const documentsByGroup = legalGroups
                 <p class="mt-2 text-sm leading-6 text-[#5d4c43]">{document.summary}</p>
                 <div class="mt-5 flex flex-col gap-3 sm:flex-row">
                   <Button href={`/legal/${document.slug}`} variant="secondary">Open page</Button>
-                  <Button href={document.pdfPath} variant="ghost">View PDF</Button>
+                  <Button href={document.pdfPath} variant="ghost">Read document</Button>
                 </div>
               </article>
             ))}

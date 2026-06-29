@@ -10,14 +10,12 @@ import { seo } from "../data/site";
 <BaseLayout title={seo.drivers.title} description={seo.drivers.description} path={seo.drivers.path}>
   <main>
     <PageHero
-      badge="For independent drivers"
       title="Local delivery runs. Your choice whether to accept."
-      intro="Approved independent drivers can review available local delivery runs, see key details, and choose whether a run works for them."
+      intro="Independent drivers can review local delivery runs, see the offered payment and delivery area, and choose whether a run works for them."
       primaryHref="/contact#driver-enquiry"
-      primaryLabel="Apply/register driver interest"
+      primaryLabel="Register driver interest"
       secondaryHref="/safety-and-trust"
       secondaryLabel="Safety and trust"
-      highlights={["Independent driver choice", "Reviewed onboarding", "No guaranteed work"]}
     />
 
     <Section title="Driver choice stays central" intro="EDD Hub is not an employer and does not guarantee jobs or earnings. Drivers are reviewed before they can go online, and every run remains a choice." tone="white">
@@ -28,26 +26,40 @@ import { seo } from "../data/site";
       </div>
     </Section>
 
-    <Section title="Driver onboarding" intro="Driver interest starts here. Required documents and checks are handled during onboarding, not through a general enquiry form." tone="warm">
-      <div class="grid gap-4 md:grid-cols-2">
-        <IconCard icon="list" title="No document uploads here" text="You will not be asked to upload insurance, right-to-work evidence or ID documents on this page." tone="gold" />
-        <IconCard icon="message" title="Start with interest" text="Register your interest first, then EDD Hub can explain the next onboarding steps." tone="blue" />
+    <Section title="How to get started" intro="Register interest first. Driver accounts are reviewed before they can receive runs." tone="warm">
+      <div class="grid gap-4 md:grid-cols-4">
+        <IconCard icon="message" title="1. Register your interest" text="Tell us where you want to drive and how to contact you." tone="brand" />
+        <IconCard icon="list" title="2. Provide the required details" text="Before going live, drivers need to provide the required identity, vehicle, insurance and right-to-work information." tone="gold" />
+        <IconCard icon="shield" title="3. EDD Hub reviews the application" text="Driver accounts are reviewed before they can receive runs." tone="green" />
+        <IconCard icon="check" title="4. Go online when approved" text="Once approved in an active area, drivers can review available runs and choose whether to accept." tone="blue" />
       </div>
     </Section>
 
-    <Section title="Good fit for" intro="EDD Hub is aimed at approved independent drivers who want local delivery opportunities they can assess before accepting." tone="white">
-      <div class="grid gap-3 text-sm font-bold leading-6 text-[#4a3731] md:grid-cols-2">
-        <p class="rounded-lg bg-[#fffaf3] p-4">Drivers who prefer local runs with clear collection and destination information.</p>
-        <p class="rounded-lg bg-[#fffaf3] p-4">Drivers who understand that work and earnings are not guaranteed.</p>
-        <p class="rounded-lg bg-[#fffaf3] p-4">Drivers willing to complete reviewed onboarding before becoming active.</p>
-        <p class="rounded-lg bg-[#fffaf3] p-4">Drivers who want to register interest in Perth, Dundee or Fife rollout areas.</p>
+    <Section title="Good fit for" intro="EDD Hub suits independent drivers who want clear local run details before deciding." tone="white">
+      <div class="grid gap-4 md:grid-cols-2">
+        <article class="rounded-lg border border-[#eadfce] bg-[#fffaf3] p-5">
+          <h2 class="text-lg font-extrabold text-[#601d1d]">Drivers who know the local area</h2>
+          <p class="mt-2 text-sm leading-6 text-[#5d4c43]">EDD Hub works best when drivers understand local streets, takeaway areas and realistic collection times.</p>
+        </article>
+        <article class="rounded-lg border border-[#eadfce] bg-[#fffaf3] p-5">
+          <h2 class="text-lg font-extrabold text-[#601d1d]">Drivers who want to choose each run</h2>
+          <p class="mt-2 text-sm leading-6 text-[#5d4c43]">You see the offered payment and delivery area before deciding whether to accept.</p>
+        </article>
+        <article class="rounded-lg border border-[#eadfce] bg-[#fffaf3] p-5">
+          <h2 class="text-lg font-extrabold text-[#601d1d]">Drivers who can respond quickly</h2>
+          <p class="mt-2 text-sm leading-6 text-[#5d4c43]">Runs are time-sensitive, so the best fit is someone who can collect when they say 5 mins or 10 mins.</p>
+        </article>
+        <article class="rounded-lg border border-[#eadfce] bg-[#fffaf3] p-5">
+          <h2 class="text-lg font-extrabold text-[#601d1d]">Drivers adding local work around other commitments</h2>
+          <p class="mt-2 text-sm leading-6 text-[#5d4c43]">EDD Hub can sit alongside other lawful delivery work, without guaranteed shifts or fixed hours.</p>
+        </article>
       </div>
     </Section>
 
     <CTASection
-      title="Apply/register driver interest"
+      title="Register driver interest"
       text="Share your name, town and contact details so EDD Hub can follow up about local driver onboarding."
-      primaryLabel="Apply/register driver interest"
+      primaryLabel="Register driver interest"
       primaryHref="/contact#driver-enquiry"
       secondaryLabel="View locations"
       secondaryHref="/locations"

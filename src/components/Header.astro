@@ -1,7 +1,6 @@
 ---
 import Button from "./Button.astro";
 import { navLinks } from "../data/nav";
-import { site } from "../data/site";
 ---
 
 <header class="sticky top-0 z-50 border-b border-[#a97c50]/18 bg-[#fffaf3]/90 backdrop-blur-md">
@@ -15,7 +14,6 @@ import { site } from "../data/site";
     </nav>
 
     <div class="hidden items-center gap-2 lg:flex">
-      <a class="rounded-lg px-3 py-2 text-sm font-extrabold text-[#601d1d] hover:bg-[#f6f1e8]" href={site.loginUrl}>Login</a>
       <Button href="/contact#general-enquiry" variant="primary" class="min-h-10 px-4 py-2">Contact EDD Hub</Button>
     </div>
 
@@ -41,7 +39,6 @@ import { site } from "../data/site";
   <div id="mobile-menu" class="border-t border-[#a97c50]/18 bg-[#fffaf3] px-4 py-4 shadow-[0_14px_34px_rgba(96,29,29,0.08)] lg:hidden" hidden>
     <nav aria-label="Mobile navigation" class="mx-auto grid max-w-6xl gap-2">
       {navLinks.map((link) => <a class="rounded-lg px-3 py-3 text-sm font-extrabold text-[#4a3731] hover:bg-[#f6f1e8] hover:text-[#601d1d]" href={link.href}>{link.label}</a>)}
-      <a class="rounded-lg px-3 py-3 text-sm font-extrabold text-[#601d1d] hover:bg-[#f6f1e8]" href={site.loginUrl}>Login</a>
     </nav>
   </div>
 </header>

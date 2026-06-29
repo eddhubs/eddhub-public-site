@@ -86,7 +86,7 @@ export const seo = {
   contact: {
     title: "Contact EDD Hub",
     description:
-      "Contact EDD Hub to register takeaway interest, apply as an independent driver, or ask about local rollout plans.",
+      "Contact EDD Hub to register interest as a takeaway or independent driver, or ask about local rollout plans.",
     path: "/contact"
   },
   legal: {
