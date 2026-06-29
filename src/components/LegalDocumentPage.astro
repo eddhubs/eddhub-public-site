@@ -1,0 +1,56 @@
+---
+import Button from "./Button.astro";
+import PageHero from "./PageHero.astro";
+import Section from "./Section.astro";
+import type { LegalDocument } from "../data/legalDocuments";
+
+interface Props {
+  document: LegalDocument;
+}
+
+const { document } = Astro.props;
+const effectiveLabel = `Effective ${document.effectiveDate}`;
+const contactHref = `mailto:${document.contactEmail}`;
+---
+
+<PageHero
+  badge="Legal"
+  title={document.title}
+  intro={document.summary}
+  primaryHref={document.pdfPath}
+  primaryLabel="View PDF"
+  secondaryHref="/legal"
+  secondaryLabel="Legal hub"
+  highlights={[document.version, effectiveLabel, document.classification]}
+/>
+
+<Section title="Document summary" intro="This page provides a short public summary. The linked PDF is the controlled legal document." tone="white">
+  <div class="grid gap-4 lg:grid-cols-[1.2fr_0.8fr]">
+    <article class="rounded-lg border border-[#a97c50]/18 bg-[#fffaf3] p-5 text-sm leading-6 text-[#4a3731] shadow-[0_12px_30px_rgba(96,29,29,0.06)]">
+      <h2 class="text-xl font-extrabold text-[#601d1d]">{document.title}</h2>
+      <p class="mt-3">{document.summary}</p>
+      <dl class="mt-5 grid gap-3 sm:grid-cols-2">
+        <div>
+          <dt class="text-xs font-extrabold uppercase tracking-[0.08em] text-[#7a542d]">Version</dt>
+          <dd class="mt-1 font-bold">{document.version}</dd>
+        </div>
+        <div>
+          <dt class="text-xs font-extrabold uppercase tracking-[0.08em] text-[#7a542d]">Effective date</dt>
+          <dd class="mt-1 font-bold">{document.effectiveDate}</dd>
+        </div>
+      </dl>
+    </article>
+
+    <aside class="rounded-lg border border-[#2f6f9f]/18 bg-[#e8f1f6] p-5 text-sm leading-6 text-[#294d5f]">
+      <h2 class="text-xl font-extrabold text-[#24587f]">Questions</h2>
+      <p class="mt-3">
+        For questions about this document, contact <a class="font-extrabold underline" href={contactHref}>{document.contactEmail}</a>.
+      </p>
+      <div class="mt-5 flex flex-col gap-3">
+        <Button href={document.pdfPath}>View PDF</Button>
+        <a class="text-sm font-extrabold text-[#24587f] underline" href={document.pdfPath} download>Download PDF</a>
+        <a class="text-sm font-extrabold text-[#24587f] underline" href="/legal">Back to Legal hub</a>
+      </div>
+    </aside>
+  </div>
+</Section>

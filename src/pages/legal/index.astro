@@ -3,39 +3,48 @@ import Button from "../../components/Button.astro";
 import PageHero from "../../components/PageHero.astro";
 import Section from "../../components/Section.astro";
 import BaseLayout from "../../layouts/BaseLayout.astro";
+import { legalDocuments, legalGroups } from "../../data/legalDocuments";
 import { seo } from "../../data/site";
 
-const legalLinks = [
-  { href: "/legal/privacy-notice", label: "Privacy notice" },
-  { href: "/legal/cookie-notice", label: "Cookie notice" },
-  { href: "/legal/driver-terms", label: "Driver terms" },
-  { href: "/legal/takeaway-terms", label: "Takeaway terms" }
-];
+const documentsByGroup = legalGroups
+  .map((group) => ({
+    ...group,
+    documents: legalDocuments.filter((document) => document.category === group.id)
+  }))
+  .filter((group) => group.documents.length > 0);
 ---
 
 <BaseLayout title={seo.legal.title} description={seo.legal.description} path={seo.legal.path}>
   <main>
     <PageHero
       badge="Legal"
-      title="Legal"
-      intro="Legal pages are placeholders in this first coded pass. Final legal content must be approved before public launch."
-      primaryHref="/contact#forms"
-      primaryLabel="Contact EDD Hub"
+      title="Legal documents"
+      intro="View the current EDD Hub public legal PDFs for takeaways, restaurants, independent drivers and visitors."
+      primaryHref="/legal/privacy-notice"
+      primaryLabel="Privacy notice"
       secondaryHref="/"
       secondaryLabel="Home"
-      highlights={["Placeholders only", "Owner review needed", "Before launch"]}
+      highlights={["PDF documents", "Effective 29 June 2026", "EDD HUB LTD"]}
     />
 
-    <Section title="Legal pages" intro="Do not treat these placeholders as final launch legal documents." tone="white">
-      <div class="grid gap-4 md:grid-cols-2">
-        {legalLinks.map((link) => (
-          <article class="rounded-lg border border-[#a97c50]/18 bg-[#fffaf3] p-5">
-            <h2 class="text-xl font-extrabold text-[#601d1d]">{link.label}</h2>
-            <p class="mt-2 text-sm leading-6 text-[#5d4c43]">This document will be added before public launch. For questions, contact info@eddhub.co.uk.</p>
-            <Button href={link.href} variant="secondary" class="mt-5">Open</Button>
-          </article>
-        ))}
-      </div>
-    </Section>
+    {
+      documentsByGroup.map((group) => (
+        <Section title={group.title} intro={group.intro} tone="white">
+          <div class="grid gap-4 md:grid-cols-2">
+            {group.documents.map((document) => (
+              <article class="rounded-lg border border-[#a97c50]/18 bg-[#fffaf3] p-5 shadow-[0_12px_30px_rgba(96,29,29,0.06)]">
+                <p class="text-xs font-extrabold uppercase tracking-[0.08em] text-[#7a542d]">{document.version} | Effective {document.effectiveDate}</p>
+                <h2 class="mt-3 text-xl font-extrabold text-[#601d1d]">{document.title}</h2>
+                <p class="mt-2 text-sm leading-6 text-[#5d4c43]">{document.summary}</p>
+                <div class="mt-5 flex flex-col gap-3 sm:flex-row">
+                  <Button href={`/legal/${document.slug}`} variant="secondary">Open page</Button>
+                  <Button href={document.pdfPath} variant="ghost">View PDF</Button>
+                </div>
+              </article>
+            ))}
+          </div>
+        </Section>
+      ))
+    }
   </main>
 </BaseLayout>

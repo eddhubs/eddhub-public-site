@@ -39,6 +39,23 @@ Preview a production build locally:
 npm run preview
 ```
 
+## Legal Documents
+
+- Public legal PDFs are stored in `public/legal/`.
+- Legal pages summarise each document and link to the controlled PDF.
+- DOCX files are not used on the public website.
+- Legal documents must be reviewed and replaced when new versions are issued.
+- The public site is not legal advice; the PDF versions control the documents.
+
+## Legal Document Update Process
+
+1. Replace PDFs in `public/legal/`.
+2. Update legal data/page metadata if filename, version or effective date changes.
+3. Run `npm.cmd run check`.
+4. Run `npm.cmd run build`.
+5. Review `/legal` and the linked pages.
+6. Commit changes.
+
 ## Cloudflare Pages Target
 
 Do not connect Cloudflare Pages or point `eddhub.co.uk` until review and explicit approval.
@@ -52,7 +69,7 @@ Intended Cloudflare Pages settings:
 ## Current First-Pass TODOs
 
 - Wire contact forms to an approved backend or form service. Current visible forms include a visitor-friendly email fallback and do not submit to a backend yet.
-- Replace legal placeholders with approved legal content or approved PDFs.
+- Replace legal PDFs and metadata when new approved versions are issued.
 - Confirm final public pricing wording.
 - Confirm Perth, Dundee and Fife rollout status before launch.
 - Confirm any approved app registration URLs.
