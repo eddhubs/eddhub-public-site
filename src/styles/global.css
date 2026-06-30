@@ -85,6 +85,18 @@ svg {
   position: relative;
 }
 
+.contact-form-actions {
+  position: relative;
+}
+
+@media (max-width: 767px) {
+  .contact-form-actions {
+    bottom: 0.75rem;
+    position: sticky;
+    z-index: 20;
+  }
+}
+
 @media (min-width: 768px) {
   .stacked-card {
     position: sticky;
