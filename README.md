@@ -6,7 +6,7 @@ This is the coded public marketing website for EDD Hub, built with Astro, TypeSc
 
 - Public website for `eddhub.co.uk`
 - Marketing, SEO, trust, conversion and lead-generation surface
-- Static Astro site with reusable components
+- Astro site with reusable components and a Cloudflare server endpoint for enquiries
 - Mobile-first first-pass build
 - Separate from the operational EDD Hub PWA/app
 
@@ -18,7 +18,7 @@ This is the coded public marketing website for EDD Hub, built with Astro, TypeSc
 - Not a customer tracking or customer account system
 - Not a dashboard
 - Not a Wix rebuild
-- Not connected to payments, authentication, a CMS or backend forms yet
+- Not connected to payments, authentication or a CMS
 
 ## Local Development
 
@@ -38,6 +38,23 @@ Preview a production build locally:
 ```sh
 npm run preview
 ```
+
+## Website Enquiry Forms
+
+The `/contact` forms post to the server-side endpoint:
+
+```text
+/api/website-enquiry
+```
+
+The endpoint stores submissions in the shared Supabase `website_enquiries` table. It must run server-side on Cloudflare and must never expose a service role key to browser code.
+
+Required Cloudflare variables/secrets:
+
+- `SUPABASE_URL`
+- `SUPABASE_SERVICE_ROLE_KEY`
+
+Set `SUPABASE_SERVICE_ROLE_KEY` as an encrypted Cloudflare secret. Do not use a `PUBLIC_` prefix for either value.
 
 ## Legal Documents
 
@@ -74,7 +91,6 @@ Intended Cloudflare Pages settings:
 
 ## Current First-Pass TODOs
 
-- Wire contact forms to an approved backend or form service. Current visible forms include a visitor-friendly email fallback and do not submit to a backend yet.
 - Replace legal PDFs and metadata when new approved versions are issued.
 - Confirm final public pricing wording.
 - Confirm Perth, Dundee and Fife rollout status before launch.

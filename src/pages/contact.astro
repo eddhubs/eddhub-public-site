@@ -7,33 +7,41 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import { seo, site } from "../data/site";
 
 const basicFields = [
-  { name: "name", label: "Name", autocomplete: "name" },
-  { name: "email", label: "Email", type: "email", autocomplete: "email" },
-  { name: "message", label: "Message", textarea: true, autocomplete: "off" }
+  { name: "name", label: "Name", autocomplete: "name", required: true },
+  { name: "email", label: "Email", type: "email", autocomplete: "email", required: true },
+  { name: "phone", label: "Phone", type: "tel", autocomplete: "tel" },
+  { name: "subject", label: "Subject", autocomplete: "off" },
+  { name: "message", label: "Message", textarea: true, autocomplete: "off", required: true }
 ] as const;
 
 const takeawayFields = [
-  { name: "name", label: "Name", autocomplete: "name" },
-  { name: "businessName", label: "Business name", autocomplete: "organization" },
-  { name: "cityTown", label: "City/town", autocomplete: "address-level2" },
+  { name: "name", label: "Contact name", autocomplete: "name", required: true },
+  { name: "businessName", label: "Business or takeaway name", autocomplete: "organization" },
+  { name: "email", label: "Email", type: "email", autocomplete: "email", required: true },
   { name: "phone", label: "Phone", type: "tel", autocomplete: "tel" },
-  { name: "email", label: "Email", type: "email", autocomplete: "email" },
-  { name: "message", label: "Message", textarea: true, autocomplete: "off" }
+  { name: "city", label: "Town/city", autocomplete: "address-level2" },
+  { name: "postcode", label: "Postcode or delivery area", autocomplete: "postal-code" },
+  { name: "roughUsage", label: "Expected usage or notes", autocomplete: "off" },
+  { name: "message", label: "Message", textarea: true, autocomplete: "off", required: true }
 ] as const;
 
 const driverFields = [
-  { name: "name", label: "Name", autocomplete: "name" },
-  { name: "cityTown", label: "City/town", autocomplete: "address-level2" },
+  { name: "name", label: "Full name", autocomplete: "name", required: true },
+  { name: "email", label: "Email", type: "email", autocomplete: "email", required: true },
   { name: "phone", label: "Phone", type: "tel", autocomplete: "tel" },
-  { name: "email", label: "Email", type: "email", autocomplete: "email" },
-  { name: "message", label: "Message", textarea: true, autocomplete: "off" }
+  { name: "city", label: "Town/city", autocomplete: "address-level2" },
+  { name: "vehicleType", label: "Vehicle type", autocomplete: "off" },
+  { name: "deliveryExperience", label: "Delivery experience", autocomplete: "off" },
+  { name: "message", label: "Message", textarea: true, autocomplete: "off", required: true }
 ] as const;
 
 const partnerFields = [
-  { name: "name", label: "Name", autocomplete: "name" },
-  { name: "organisation", label: "Organisation", autocomplete: "organization" },
-  { name: "email", label: "Email", type: "email", autocomplete: "email" },
-  { name: "message", label: "Message", textarea: true, autocomplete: "off" }
+  { name: "name", label: "Name", autocomplete: "name", required: true },
+  { name: "organisationName", label: "Organisation name", autocomplete: "organization" },
+  { name: "email", label: "Email", type: "email", autocomplete: "email", required: true },
+  { name: "phone", label: "Phone", type: "tel", autocomplete: "tel" },
+  { name: "subject", label: "Subject or enquiry reason", autocomplete: "off" },
+  { name: "message", label: "Message", textarea: true, autocomplete: "off", required: true }
 ] as const;
 
 const enquiryCards = [
@@ -115,10 +123,10 @@ const toneClasses = {
         Choose an enquiry option above and the right form will open here.
       </div>
       <div class="grid gap-5">
-        <ContactForm id="takeaway-enquiry" title="Takeaway enquiry form" intro="For takeaway owners or managers who want to use EDD Hub for overflow delivery support." fields={takeawayFields} hidden />
-        <ContactForm id="driver-enquiry" title="Driver enquiry form" intro="For independent drivers who want to hear about local EDD Hub rollout and driver onboarding." fields={driverFields} hidden />
-        <ContactForm id="general-enquiry" title="General enquiry form" intro="For general questions about EDD Hub, local rollout or how the service works." fields={basicFields} hidden />
-        <ContactForm id="partnership-enquiry" title="Partnership or media enquiry form" intro="For partnerships, local press, insurance, councils, business support or other external enquiries." fields={partnerFields} hidden />
+        <ContactForm id="takeaway-enquiry" enquiryType="takeaway" title="Takeaway enquiry form" intro="For takeaway owners or managers who want to use EDD Hub for overflow delivery support." fields={takeawayFields} hidden />
+        <ContactForm id="driver-enquiry" enquiryType="driver" title="Driver enquiry form" intro="For independent drivers who want to hear about local EDD Hub rollout and driver onboarding." fields={driverFields} hidden />
+        <ContactForm id="general-enquiry" enquiryType="general" title="General enquiry form" intro="For general questions about EDD Hub, local rollout or how the service works." fields={basicFields} hidden />
+        <ContactForm id="partnership-enquiry" enquiryType="partnership" title="Partnership or media enquiry form" intro="For partnerships, local press, insurance, councils, business support or other external enquiries." fields={partnerFields} hidden />
       </div>
     </Section>
 
@@ -144,15 +152,35 @@ const toneClasses = {
       background: #fbb040;
       color: #601d1d;
     }
+
+    [data-form-status][data-tone="success"] {
+      border-color: rgba(47, 143, 91, 0.2);
+      background: #e7f4ec;
+      color: #236b43;
+    }
+
+    [data-form-status][data-tone="error"] {
+      border-color: rgba(170, 39, 39, 0.2);
+      background: #fff4ee;
+      color: #7a1c1c;
+    }
   </style>
 
   <script>
     type EnquiryOptions = { updateHash?: boolean; scroll?: boolean };
+    type EnquiryType = "takeaway" | "driver" | "general" | "partnership";
 
     const enquiryIds = ["takeaway-enquiry", "driver-enquiry", "general-enquiry", "partnership-enquiry"];
     const triggers = Array.from(document.querySelectorAll<HTMLElement>("[data-enquiry-trigger]"));
     const panels = Array.from(document.querySelectorAll<HTMLElement>("[data-enquiry-panel]"));
     const placeholder = document.querySelector<HTMLElement>("[data-contact-placeholder]");
+    const contactForms = Array.from(document.querySelectorAll<HTMLFormElement>("[data-contact-form]"));
+    const successMessages: Record<EnquiryType, string> = {
+      takeaway: "Thanks. Your takeaway interest has been received. We'll review it and get back to you.",
+      driver: "Thanks. Your driver interest has been received. We'll review it and get back to you.",
+      general: "Thanks. Your enquiry has been received.",
+      partnership: "Thanks. Your partnership/media enquiry has been received."
+    };
 
     function openEnquiry(id: string | null, options: EnquiryOptions = {}) {
       const selectedId = typeof id === "string" && enquiryIds.includes(id) ? id : "";
@@ -197,6 +225,100 @@ const toneClasses = {
       trigger.addEventListener("click", (event) => {
         event.preventDefault();
         openEnquiry(trigger.getAttribute("data-enquiry-target"), { updateHash: true, scroll: true });
+      });
+    });
+
+    function statusForForm(form: HTMLFormElement) {
+      return form.querySelector<HTMLElement>("[data-form-status]");
+    }
+
+    function submitButtonForForm(form: HTMLFormElement) {
+      return form.querySelector<HTMLButtonElement>("button[type='submit']");
+    }
+
+    function setFormStatus(form: HTMLFormElement, message: string, tone: "default" | "error" | "success" = "default") {
+      const status = statusForForm(form);
+
+      if (!status) {
+        return;
+      }
+
+      status.textContent = message;
+      status.dataset.tone = tone;
+    }
+
+    function formPayload(form: HTMLFormElement) {
+      const data = new FormData(form);
+      return Object.fromEntries(data.entries());
+    }
+
+    function resetStartedAt(form: HTMLFormElement) {
+      const startedAt = form.querySelector<HTMLInputElement>("[data-started-at]");
+
+      if (startedAt) {
+        startedAt.value = String(Date.now());
+      }
+    }
+
+    contactForms.forEach((form) => {
+      resetStartedAt(form);
+
+      form.addEventListener("submit", async (event) => {
+        event.preventDefault();
+
+        const submitButton = submitButtonForForm(form);
+        const enquiryType = form.dataset.enquiryType as EnquiryType | undefined;
+
+        if (!form.reportValidity()) {
+          setFormStatus(form, "Please complete the required fields before sending.", "error");
+          return;
+        }
+
+        if (!enquiryType || !(enquiryType in successMessages)) {
+          setFormStatus(form, "Please choose an enquiry type and try again.", "error");
+          return;
+        }
+
+        if (submitButton) {
+          submitButton.disabled = true;
+          submitButton.textContent = "Sending...";
+        }
+
+        setFormStatus(form, "Sending your enquiry...", "default");
+
+        try {
+          const response = await fetch("/api/website-enquiry", {
+            body: JSON.stringify(formPayload(form)),
+            headers: {
+              "Content-Type": "application/json"
+            },
+            method: "POST"
+          });
+          const result = await response.json().catch(() => ({}));
+
+          if (!response.ok || result?.ok !== true) {
+            throw new Error(
+              typeof result?.message === "string"
+                ? result.message
+                : "Your enquiry could not be sent. Please try again."
+            );
+          }
+
+          form.reset();
+          resetStartedAt(form);
+          setFormStatus(form, successMessages[enquiryType], "success");
+        } catch (error) {
+          const errorMessage =
+            error instanceof Error
+              ? error.message
+              : "Your enquiry could not be sent. Please try again.";
+          setFormStatus(form, errorMessage, "error");
+        } finally {
+          if (submitButton) {
+            submitButton.disabled = false;
+            submitButton.textContent = submitButton.dataset.submitLabel ?? "Send enquiry";
+          }
+        }
       });
     });
 
